@@ -203,21 +203,13 @@
 
                 <!-- Cabin Keypad panel (1..10) -->
                 <div id="car_calls_grid" data-tchmi-type="TcHmi.Controls.System.TcHmiContainer" data-tchmi-height="180" data-tchmi-left="15" data-tchmi-top="270" data-tchmi-width="315" data-tchmi-class-names='["calls-button-grid"]'>
-                    <div id="keypad_btn_1" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-text="1" data-tchmi-width="45" data-tchmi-height="45" data-tchmi-left="10" data-tchmi-top="10" data-tchmi-state-symbol="%s%ADS.PLC1.GVL_HMI.bCabinCallsInside[1]%/s%">
-<script data-tchmi-target-attribute="data-tchmi-class-names" type="application/json">
-["keypad-btn"]
-</script>
-</div>
+                    <div id="keypad_btn_1" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-text="1" data-tchmi-class-names='["keypad-btn"]' data-tchmi-width="45" data-tchmi-height="45" data-tchmi-left="10" data-tchmi-top="10" data-tchmi-state-symbol="%s%PLC1.GVL_HMI.bCabinCallsInside[0]%/s%"></div>
                     <div id="keypad_btn_2" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-text="2" data-tchmi-class-names='["keypad-btn"]' data-tchmi-width="45" data-tchmi-height="45" data-tchmi-left="70" data-tchmi-top="10" data-tchmi-state-symbol="%s%PLC1.GVL_HMI.bCabinCallsInside[1]%/s%"></div>
                     <div id="keypad_btn_3" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-text="3" data-tchmi-class-names='["keypad-btn"]' data-tchmi-width="45" data-tchmi-height="45" data-tchmi-left="130" data-tchmi-top="10" data-tchmi-state-symbol="%s%PLC1.GVL_HMI.bCabinCallsInside[2]%/s%"></div>
                     <div id="keypad_btn_4" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-text="4" data-tchmi-class-names='["keypad-btn"]' data-tchmi-width="45" data-tchmi-height="45" data-tchmi-left="190" data-tchmi-top="10" data-tchmi-state-symbol="%s%PLC1.GVL_HMI.bCabinCallsInside[3]%/s%"></div>
                     <div id="keypad_btn_5" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-text="5" data-tchmi-class-names='["keypad-btn"]' data-tchmi-width="45" data-tchmi-height="45" data-tchmi-left="250" data-tchmi-top="10" data-tchmi-state-symbol="%s%PLC1.GVL_HMI.bCabinCallsInside[4]%/s%"></div>
 
-                    <div id="keypad_btn_6" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-text="6" data-tchmi-width="45" data-tchmi-height="45" data-tchmi-left="10" data-tchmi-top="70" data-tchmi-state-symbol="%s%PLC1.GVL_HMI.bCabinCallsInside[5]%/s%">
-<script data-tchmi-target-attribute="data-tchmi-class-names" type="application/json">
-["keypad-btn"]
-</script>
-</div>
+                    <div id="keypad_btn_6" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-text="6" data-tchmi-class-names='["keypad-btn"]' data-tchmi-width="45" data-tchmi-height="45" data-tchmi-left="10" data-tchmi-top="70" data-tchmi-state-symbol="%s%PLC1.GVL_HMI.bCabinCallsInside[5]%/s%"></div>
                     <div id="keypad_btn_7" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-text="7" data-tchmi-class-names='["keypad-btn"]' data-tchmi-width="45" data-tchmi-height="45" data-tchmi-left="70" data-tchmi-top="70" data-tchmi-state-symbol="%s%PLC1.GVL_HMI.bCabinCallsInside[6]%/s%"></div>
                     <div id="keypad_btn_8" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-text="8" data-tchmi-class-names='["keypad-btn"]' data-tchmi-width="45" data-tchmi-height="45" data-tchmi-left="130" data-tchmi-top="70" data-tchmi-state-symbol="%s%PLC1.GVL_HMI.bCabinCallsInside[7]%/s%"></div>
                     <div id="keypad_btn_9" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-text="9" data-tchmi-class-names='["keypad-btn"]' data-tchmi-width="45" data-tchmi-height="45" data-tchmi-left="190" data-tchmi-top="70" data-tchmi-state-symbol="%s%PLC1.GVL_HMI.bCabinCallsInside[8]%/s%"></div>
