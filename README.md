@@ -10,11 +10,16 @@ An industrial-grade, object-oriented elevator control system simulation develope
 
 ## 📺 Project Showcase
 
-Here is a recording of the live elevator operation, showing real-time dispatch scheduling, landing/car calls latching, and frame-by-frame door animations:
+### 🎥 Watch the Demonstration on YouTube
+[![Watch the video](https://img.shields.io/badge/YouTube-Watch%20Showcase-red?style=for-the-badge&logo=youtube)](https://www.youtube.com/watch?v=YOUR_VIDEO_ID)
 
-https://github.com/user-attachments/assets/video_recording.mp4
+*(Click the badge above to watch the demonstration video on YouTube — make sure to replace `YOUR_VIDEO_ID` with your actual YouTube URL)*
 
-*(Click the link above to view the recorded mp4 demonstration file in this repository)*
+---
+
+### 📂 Local Video Recording
+A high-quality screen recording demonstrating the real-time dispatch scheduling, call latching, and frame-by-frame door animations is also available locally at:
+👉 **[video_recording.mp4](file:///c:/Users/moham/Azimal/Portfolio/ElevatorControlSystem/video_recording.mp4)**
 
 ---
 
@@ -35,38 +40,38 @@ The PLC application is structured around a strict separation of concerns, ensuri
 classDiagram
     class I_ElevatorCar {
         <<interface>>
-        +Position: LREAL [GET]
-        +CurrentFloor: INT [GET]
-        +DoorState: E_DoorState [GET]
-        +IsBusy: BOOL [GET]
-        +MoveToFloor(nFloor: INT) : BOOL
+        +Position : LREAL
+        +CurrentFloor : INT
+        +DoorState : E_DoorState
+        +IsBusy : BOOL
+        +MoveToFloor(nFloor) : BOOL
         +OpenDoors() : BOOL
     }
 
     class FB_ElevatorCar {
-        -rfPosition: LREAL
-        -nTargetFloor: INT
-        -eDoorState: E_DoorState
-        -bTriggerDoorOpen: BOOL
-        -fbDoorDwellTimer: TON
-        -fbOpeningTimer: TON
-        -fbClosingTimer: TON
-        +MoveToFloor(nFloor: INT) : BOOL
+        -rfPosition : LREAL
+        -nTargetFloor : INT
+        -eDoorState : E_DoorState
+        -bTriggerDoorOpen : BOOL
+        -fbDoorDwellTimer : TON
+        -fbOpeningTimer : TON
+        -fbClosingTimer : TON
+        +MoveToFloor(nFloor) : BOOL
         +OpenDoors() : BOOL
     }
 
     class FB_Dispatcher {
-        -bMovingUp: BOOL
-        -bMovingDown: BOOL
-        -nTargetFloor: INT
-        +Update(refCar: I_ElevatorCar) : BOOL
+        -bMovingUp : BOOL
+        -bMovingDown : BOOL
+        -nTargetFloor : INT
+        +Update(refCar) : BOOL
     }
 
     class MAIN {
-        -fbCar: FB_ElevatorCar
-        -fbDispatcher: FB_Dispatcher
-        -bRunTestCases: BOOL
-        -nTestStep: INT
+        -fbCar : FB_ElevatorCar
+        -fbDispatcher : FB_Dispatcher
+        -bRunTestCases : BOOL
+        -nTestStep : INT
     }
 
     I_ElevatorCar <|.. FB_ElevatorCar : Implements
