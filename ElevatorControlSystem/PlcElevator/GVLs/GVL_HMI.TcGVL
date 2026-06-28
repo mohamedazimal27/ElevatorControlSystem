@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <GVL Name="GVL_HMI" Id="{3a7a92fb-1188-4c12-8822-0d127918a230}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+	bFloorCallsOutside : ARRAY[1..10] OF BOOL; // HMI Landing Call Buttons
+	bCabinCallsInside  : ARRAY[1..10] OF BOOL; // HMI Internal Cabin Buttons
+	bHmiObstruction    : BOOL;                // HMI Door Obstruction Toggle
+	
+	// Status Feedbacks for HMI Animation
+	rfHmiCabinPosition : LREAL := 1.0;        // Continuous position (1.0 to 10.0)
+	nHmiCurrentFloor   : INT := 1;            // Discrete Current Floor
+	eHmiDoorState      : INT;                 // Casted E_DoorState for HMI binding
+	bHmiMovingUp       : BOOL;                // Cabin is moving up
+	bHmiMovingDown     : BOOL;                // Cabin is moving down
+	nHmiTargetFloor    : INT;                 // Current Target Floor
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

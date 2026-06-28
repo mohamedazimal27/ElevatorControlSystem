@@ -29,7 +29,1048 @@
     "DEFAULTTIMEFORMATLOCALE": "client",
     "DEFAULTTIMEZONE": "client",
     "DEFAULTUSERGROUP": "__SystemUsers",
-    "DEFINITIONS": {},
+    "DEFINITIONS": {
+        "PLC1.ARRAY_1..10_OF-BOOL": {
+            "items": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "maxItems": 10,
+            "minItems": 10,
+            "startOffset": 1,
+            "type": "array"
+        },
+        "PLC1.ARRAY_1..1_OF-PLC.PlcTaskSystemInfo": {
+            "items": {
+                "$ref": "#/definitions/PLC1.PLC.PlcTaskSystemInfo"
+            },
+            "maxItems": 1,
+            "minItems": 1,
+            "startOffset": 1,
+            "type": "array"
+        },
+        "PLC1.E_DoorState": {
+            "attributes": {
+                "generate_implicit_init_function": "",
+                "qualified_only": "",
+                "strict": ""
+            },
+            "enum": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "options": [
+                {
+                    "label": "CLOSED",
+                    "value": 0
+                },
+                {
+                    "label": "OPENING",
+                    "value": 1
+                },
+                {
+                    "label": "OPEN",
+                    "value": 2
+                },
+                {
+                    "label": "CLOSING",
+                    "value": 3
+                }
+            ],
+            "type": "integer"
+        },
+        "PLC1.FB_Dispatcher": {
+            "properties": {
+                "bMovingDown": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/BOOL"
+                        },
+                        {
+                            "propertyOrder": 2
+                        }
+                    ]
+                },
+                "bMovingUp": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/BOOL"
+                        },
+                        {
+                            "propertyOrder": 1
+                        }
+                    ]
+                },
+                "nTargetFloor": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/INT"
+                        },
+                        {
+                            "comment": "0 means no target (idle)",
+                            "propertyOrder": 3
+                        }
+                    ]
+                }
+            },
+            "type": "object"
+        },
+        "PLC1.FB_ElevatorCar": {
+            "attributes": {
+                "TcImplements": "I_ElevatorCar"
+            },
+            "properties": {
+                "bMoving": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/BOOL"
+                        },
+                        {
+                            "propertyOrder": 4
+                        }
+                    ]
+                },
+                "bObstruction": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/BOOL"
+                        },
+                        {
+                            "propertyOrder": 5
+                        }
+                    ]
+                },
+                "bTriggerDoorOpen": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/BOOL"
+                        },
+                        {
+                            "propertyOrder": 6
+                        }
+                    ]
+                },
+                "eDoorState": {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/PLC1.E_DoorState"
+                        },
+                        {
+                            "propertyOrder": 3
+                        }
+                    ]
+                },
+                "fbClosingTimer": {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/PLC1.Tc2_Standard.TON"
+                        },
+                        {
+                            "propertyOrder": 9
+                        }
+                    ]
+                },
+                "fbDoorDwellTimer": {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/PLC1.Tc2_Standard.TON"
+                        },
+                        {
+                            "propertyOrder": 7
+                        }
+                    ]
+                },
+                "fbOpeningTimer": {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/PLC1.Tc2_Standard.TON"
+                        },
+                        {
+                            "propertyOrder": 8
+                        }
+                    ]
+                },
+                "nTargetFloor": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/INT"
+                        },
+                        {
+                            "propertyOrder": 2
+                        }
+                    ]
+                },
+                "rfPosition": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/LREAL"
+                        },
+                        {
+                            "propertyOrder": 1
+                        }
+                    ]
+                }
+            },
+            "type": "object"
+        },
+        "PLC1.ITComObjectServer": {
+            "type": "object"
+        },
+        "PLC1.PLC.EPlcPersistentStatus": {
+            "enum": [
+                0,
+                1,
+                2
+            ],
+            "options": [
+                {
+                    "label": "PS_None",
+                    "value": 0
+                },
+                {
+                    "label": "PS_All",
+                    "value": 1
+                },
+                {
+                    "label": "PS_Partial",
+                    "value": 2
+                }
+            ],
+            "type": "integer"
+        },
+        "PLC1.PLC.PlcAppSystemInfo": {
+            "properties": {
+                "AdsPort": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/UINT"
+                        },
+                        {
+                            "propertyOrder": 5
+                        }
+                    ]
+                },
+                "AppName": {
+                    "allOf": [
+                        {
+                            "maxLength": 63,
+                            "propertyOrder": 16
+                        },
+                        {
+                            "$ref": "tchmi:general#/definitions/String"
+                        }
+                    ]
+                },
+                "AppTimestamp": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/DT"
+                        },
+                        {
+                            "propertyOrder": 8
+                        }
+                    ]
+                },
+                "BSODOccured": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/BOOL"
+                        },
+                        {
+                            "propertyOrder": 12
+                        }
+                    ]
+                },
+                "BootDataLoaded": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/BOOL"
+                        },
+                        {
+                            "propertyOrder": 6
+                        }
+                    ]
+                },
+                "Flags": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/DWORD"
+                        },
+                        {
+                            "propertyOrder": 4
+                        }
+                    ]
+                },
+                "KeepOutputsOnBP": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/BOOL"
+                        },
+                        {
+                            "propertyOrder": 9
+                        }
+                    ]
+                },
+                "LicensesPending": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/BOOL"
+                        },
+                        {
+                            "propertyOrder": 11
+                        }
+                    ]
+                },
+                "LoggedIn": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/BOOL"
+                        },
+                        {
+                            "propertyOrder": 13
+                        }
+                    ]
+                },
+                "ObjId": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/OTCID"
+                        },
+                        {
+                            "attributes": {
+                                "OTCID": ""
+                            },
+                            "propertyOrder": 1
+                        }
+                    ]
+                },
+                "OldBootData": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/BOOL"
+                        },
+                        {
+                            "propertyOrder": 7
+                        }
+                    ]
+                },
+                "OnlineChangeCnt": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/UDINT"
+                        },
+                        {
+                            "propertyOrder": 3
+                        }
+                    ]
+                },
+                "PersistentStatus": {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/PLC1.PLC.EPlcPersistentStatus"
+                        },
+                        {
+                            "propertyOrder": 14
+                        }
+                    ]
+                },
+                "ProjectName": {
+                    "allOf": [
+                        {
+                            "maxLength": 63,
+                            "propertyOrder": 17
+                        },
+                        {
+                            "$ref": "tchmi:general#/definitions/String"
+                        }
+                    ]
+                },
+                "ShutdownInProgress": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/BOOL"
+                        },
+                        {
+                            "propertyOrder": 10
+                        }
+                    ]
+                },
+                "TComSrvPtr": {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/PLC1.ITComObjectServer"
+                        },
+                        {
+                            "propertyOrder": 15
+                        }
+                    ]
+                },
+                "TaskCnt": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/UDINT"
+                        },
+                        {
+                            "propertyOrder": 2
+                        }
+                    ]
+                }
+            },
+            "type": "object"
+        },
+        "PLC1.PLC.PlcTaskSystemInfo": {
+            "properties": {
+                "AdsPort": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/UINT"
+                        },
+                        {
+                            "propertyOrder": 4
+                        }
+                    ]
+                },
+                "CycleCount": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/UDINT"
+                        },
+                        {
+                            "propertyOrder": 5
+                        }
+                    ]
+                },
+                "CycleTime": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/UDINT"
+                        },
+                        {
+                            "propertyOrder": 2
+                        }
+                    ]
+                },
+                "CycleTimeExceeded": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/BOOL"
+                        },
+                        {
+                            "propertyOrder": 9
+                        }
+                    ]
+                },
+                "DcTaskTime": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/LINT"
+                        },
+                        {
+                            "propertyOrder": 6
+                        }
+                    ]
+                },
+                "FirstCycle": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/BOOL"
+                        },
+                        {
+                            "propertyOrder": 8
+                        }
+                    ]
+                },
+                "InCallAfterOutputUpdate": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/BOOL"
+                        },
+                        {
+                            "propertyOrder": 10
+                        }
+                    ]
+                },
+                "LastExecTime": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/UDINT"
+                        },
+                        {
+                            "propertyOrder": 7
+                        }
+                    ]
+                },
+                "ObjId": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/OTCID"
+                        },
+                        {
+                            "attributes": {
+                                "OTCID": ""
+                            },
+                            "propertyOrder": 1
+                        }
+                    ]
+                },
+                "Priority": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/UINT"
+                        },
+                        {
+                            "propertyOrder": 3
+                        }
+                    ]
+                },
+                "RTViolation": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/BOOL"
+                        },
+                        {
+                            "propertyOrder": 11
+                        }
+                    ]
+                },
+                "TaskName": {
+                    "allOf": [
+                        {
+                            "maxLength": 63,
+                            "propertyOrder": 12
+                        },
+                        {
+                            "$ref": "tchmi:general#/definitions/String"
+                        }
+                    ]
+                }
+            },
+            "type": "object"
+        },
+        "PLC1.POINTER-TO-BYTE": {
+            "allOf": [
+                {
+                    "allowImplicitAccess": false
+                },
+                {
+                    "$ref": "tchmi:general#/definitions/BYTE"
+                }
+            ]
+        },
+        "PLC1.POINTER-TO-STRING-80": {
+            "allOf": [
+                {
+                    "allowImplicitAccess": false
+                },
+                {
+                    "$ref": "tchmi:general#/definitions/STRING%2880%29"
+                }
+            ]
+        },
+        "PLC1.POINTER-TO-_Implicit_Jitter_Distribution": {
+            "allOf": [
+                {
+                    "allowImplicitAccess": false
+                },
+                {
+                    "$ref": "#/definitions/PLC1._Implicit_Jitter_Distribution"
+                }
+            ]
+        },
+        "PLC1.ST_LibVersion": {
+            "properties": {
+                "iBuild": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/UINT"
+                        },
+                        {
+                            "propertyOrder": 3
+                        }
+                    ]
+                },
+                "iMajor": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/UINT"
+                        },
+                        {
+                            "propertyOrder": 1
+                        }
+                    ]
+                },
+                "iMinor": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/UINT"
+                        },
+                        {
+                            "propertyOrder": 2
+                        }
+                    ]
+                },
+                "iRevision": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/UINT"
+                        },
+                        {
+                            "propertyOrder": 4
+                        }
+                    ]
+                },
+                "nFlags": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/DWORD"
+                        },
+                        {
+                            "propertyOrder": 5
+                        }
+                    ]
+                },
+                "sVersion": {
+                    "allOf": [
+                        {
+                            "maxLength": 23,
+                            "propertyOrder": 6
+                        },
+                        {
+                            "$ref": "tchmi:general#/definitions/String"
+                        }
+                    ]
+                }
+            },
+            "type": "object"
+        },
+        "PLC1.Tc2_Standard.TON": {
+            "properties": {
+                "ET": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/TIME"
+                        },
+                        {
+                            "comment": "elapsed time",
+                            "propertyOrder": 4
+                        }
+                    ]
+                },
+                "IN": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/BOOL"
+                        },
+                        {
+                            "comment": "starts timer with rising edge, resets timer with falling edge",
+                            "propertyOrder": 1
+                        }
+                    ]
+                },
+                "M": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/BOOL"
+                        },
+                        {
+                            "propertyOrder": 5
+                        }
+                    ]
+                },
+                "PT": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/TIME"
+                        },
+                        {
+                            "comment": "time to pass, before Q is set",
+                            "propertyOrder": 2
+                        }
+                    ]
+                },
+                "Q": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/BOOL"
+                        },
+                        {
+                            "comment": "gets TRUE, delay time (PT) after a rising edge at IN",
+                            "propertyOrder": 3
+                        }
+                    ]
+                },
+                "StartTime": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/TIME"
+                        },
+                        {
+                            "propertyOrder": 6
+                        }
+                    ]
+                }
+            },
+            "type": "object"
+        },
+        "PLC1._Implicit_Jitter_Distribution": {
+            "attributes": {
+                "hide": ""
+            },
+            "properties": {
+                "wCountJitterNeg": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/WORD"
+                        },
+                        {
+                            "propertyOrder": 2
+                        }
+                    ]
+                },
+                "wCountJitterPos": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/WORD"
+                        },
+                        {
+                            "propertyOrder": 3
+                        }
+                    ]
+                },
+                "wRangeMax": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/WORD"
+                        },
+                        {
+                            "propertyOrder": 1
+                        }
+                    ]
+                }
+            },
+            "type": "object"
+        },
+        "PLC1._Implicit_KindOfTask": {
+            "attributes": {
+                "generate_implicit_init_function": "",
+                "hide": ""
+            },
+            "enum": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "options": [
+                {
+                    "label": "_implicit_cyclic",
+                    "value": 0
+                },
+                {
+                    "label": "_implicit_event",
+                    "value": 1
+                },
+                {
+                    "label": "_implicit_external",
+                    "value": 2
+                },
+                {
+                    "label": "_implicit_freewheeling",
+                    "value": 3
+                }
+            ],
+            "type": "integer"
+        },
+        "PLC1._Implicit_Task_Info": {
+            "attributes": {
+                "hide": ""
+            },
+            "properties": {
+                "KindOf": {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/PLC1._Implicit_KindOfTask"
+                        },
+                        {
+                            "propertyOrder": 4
+                        }
+                    ]
+                },
+                "bActive": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/BOOL"
+                        },
+                        {
+                            "propertyOrder": 27
+                        }
+                    ]
+                },
+                "bProfilingTask": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/BOOL"
+                        },
+                        {
+                            "propertyOrder": 6
+                        }
+                    ]
+                },
+                "bShouldBlock": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/BOOL"
+                        },
+                        {
+                            "propertyOrder": 26
+                        }
+                    ]
+                },
+                "bWatchdog": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/BOOL"
+                        },
+                        {
+                            "propertyOrder": 5
+                        }
+                    ]
+                },
+                "bWithinSPSTimeSlicing": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/BOOL"
+                        },
+                        {
+                            "propertyOrder": 24
+                        }
+                    ]
+                },
+                "byDummy": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/BYTE"
+                        },
+                        {
+                            "propertyOrder": 25
+                        }
+                    ]
+                },
+                "diJitter": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/DINT"
+                        },
+                        {
+                            "propertyOrder": 17
+                        }
+                    ]
+                },
+                "diJitterMax": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/DINT"
+                        },
+                        {
+                            "propertyOrder": 19
+                        }
+                    ]
+                },
+                "diJitterMin": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/DINT"
+                        },
+                        {
+                            "propertyOrder": 18
+                        }
+                    ]
+                },
+                "dwAverageCycleTime": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/DWORD"
+                        },
+                        {
+                            "propertyOrder": 14
+                        }
+                    ]
+                },
+                "dwCycleCount": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/DWORD"
+                        },
+                        {
+                            "propertyOrder": 20
+                        }
+                    ]
+                },
+                "dwEventFunctionPointer": {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/PLC1.POINTER-TO-BYTE"
+                        },
+                        {
+                            "propertyOrder": 7
+                        }
+                    ]
+                },
+                "dwIECCycleCount": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/DWORD"
+                        },
+                        {
+                            "propertyOrder": 28
+                        }
+                    ]
+                },
+                "dwInterval": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/DWORD"
+                        },
+                        {
+                            "propertyOrder": 11
+                        }
+                    ]
+                },
+                "dwLastCycleTime": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/DWORD"
+                        },
+                        {
+                            "propertyOrder": 13
+                        }
+                    ]
+                },
+                "dwMaxCycleTime": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/DWORD"
+                        },
+                        {
+                            "propertyOrder": 15
+                        }
+                    ]
+                },
+                "dwMinCycleTime": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/DWORD"
+                        },
+                        {
+                            "propertyOrder": 16
+                        }
+                    ]
+                },
+                "dwTaskEntryFunctionPointer": {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/PLC1.POINTER-TO-BYTE"
+                        },
+                        {
+                            "propertyOrder": 9
+                        }
+                    ]
+                },
+                "dwVersion": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/DWORD"
+                        },
+                        {
+                            "propertyOrder": 1
+                        }
+                    ]
+                },
+                "dwWatchdogSensitivity": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/DWORD"
+                        },
+                        {
+                            "propertyOrder": 10
+                        }
+                    ]
+                },
+                "dwWatchdogTime": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/DWORD"
+                        },
+                        {
+                            "propertyOrder": 12
+                        }
+                    ]
+                },
+                "nPriority": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/INT"
+                        },
+                        {
+                            "propertyOrder": 3
+                        }
+                    ]
+                },
+                "pJitterDistribution": {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/PLC1.POINTER-TO-_Implicit_Jitter_Distribution"
+                        },
+                        {
+                            "propertyOrder": 23
+                        }
+                    ]
+                },
+                "pszExternalEvent": {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/PLC1.POINTER-TO-STRING-80"
+                        },
+                        {
+                            "propertyOrder": 8
+                        }
+                    ]
+                },
+                "pszName": {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/PLC1.POINTER-TO-STRING-80"
+                        },
+                        {
+                            "propertyOrder": 2
+                        }
+                    ]
+                },
+                "wNumOfJitterDistributions": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/WORD"
+                        },
+                        {
+                            "propertyOrder": 22
+                        }
+                    ]
+                },
+                "wTaskStatus": {
+                    "allOf": [
+                        {
+                            "$ref": "tchmi:general#/definitions/WORD"
+                        },
+                        {
+                            "propertyOrder": 21
+                        }
+                    ]
+                }
+            },
+            "type": "object"
+        }
+    },
     "DEFLATECOMPRESSIONLEVEL": 5,
     "DIAGNOSTICS_DOMAINS": [],
     "DISABLED_CONFIGURATION_HINTS": [],
@@ -908,6 +1949,289 @@
             "OPTIONS": {},
             "SCHEMA": {
                 "function": true
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_HMI.bFloorCallsOutside": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_HMI::bFloorCallsOutside",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "comment": "HMI Landing Call Buttons"
+                    },
+                    {
+                        "$ref": "tchmi:server#/definitions/PLC1.ARRAY_1..10_OF-BOOL"
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_HMI.bHmiMovingDown": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_HMI::bHmiMovingDown",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "comment": "Cabin is moving down"
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_HMI.bHmiObstruction": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_HMI::bHmiObstruction",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "comment": "HMI Door Obstruction Toggle"
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_HMI.eHmiDoorState": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_HMI::eHmiDoorState",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/INT"
+                    },
+                    {
+                        "comment": "Casted E_DoorState for HMI binding"
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_HMI.nHmiCurrentFloor": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_HMI::nHmiCurrentFloor",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/INT"
+                    },
+                    {
+                        "comment": "Discrete Current Floor"
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_HMI.nHmiTargetFloor": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_HMI::nHmiTargetFloor",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/INT"
+                    },
+                    {
+                        "comment": "Current Target Floor"
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_HMI.rfHmiCabinPosition": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_HMI::rfHmiCabinPosition",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/LREAL"
+                    },
+                    {
+                        "comment": "Continuous position (1.0 to 10.0)"
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.Global_Version.stLibVersion_Tc2_Standard": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::Global_Version::stLibVersion_Tc2_Standard",
+            "SCHEMA": {
+                "$ref": "tchmi:server#/definitions/PLC1.ST_LibVersion"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.Global_Version.stLibVersion_Tc2_System": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::Global_Version::stLibVersion_Tc2_System",
+            "SCHEMA": {
+                "$ref": "tchmi:server#/definitions/PLC1.ST_LibVersion"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.Global_Version.stLibVersion_Tc3_Module": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::Global_Version::stLibVersion_Tc3_Module",
+            "SCHEMA": {
+                "$ref": "tchmi:server#/definitions/PLC1.ST_LibVersion"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.MAIN.bRunTestCases": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::MAIN::bRunTestCases",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "comment": "Automated Test Harness"
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.MAIN.fbCar": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::MAIN::fbCar",
+            "SCHEMA": {
+                "$ref": "tchmi:server#/definitions/PLC1.FB_ElevatorCar"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.MAIN.fbDispatcher": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::MAIN::fbDispatcher",
+            "SCHEMA": {
+                "$ref": "tchmi:server#/definitions/PLC1.FB_Dispatcher"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.MAIN.iTest": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::MAIN::iTest",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/INT"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.MAIN.nTestStep": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::MAIN::nTestStep",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/INT"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.TwinCAT_SystemInfoVarList._AppInfo": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::TwinCAT_SystemInfoVarList::_AppInfo",
+            "SCHEMA": {
+                "$ref": "tchmi:server#/definitions/PLC1.PLC.PlcAppSystemInfo"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.TwinCAT_SystemInfoVarList._TaskInfo": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::TwinCAT_SystemInfoVarList::_TaskInfo",
+            "SCHEMA": {
+                "$ref": "tchmi:server#/definitions/PLC1.ARRAY_1..1_OF-PLC.PlcTaskSystemInfo"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.TwinCAT_SystemInfoVarList._TaskOid_PlcTask": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::TwinCAT_SystemInfoVarList::_TaskOid_PlcTask",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/OTCID"
+                    },
+                    {
+                        "attributes": {
+                            "OTCID": ""
+                        }
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.TwinCAT_SystemInfoVarList._TaskPouOid_PlcTask": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::TwinCAT_SystemInfoVarList::_TaskPouOid_PlcTask",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/OTCID"
+                    },
+                    {
+                        "attributes": {
+                            "OTCID": ""
+                        }
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.TwinCAT_SystemInfoVarList.__PlcTask": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::TwinCAT_SystemInfoVarList::__PlcTask",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "attributes": {
+                            "TcContextName": "PlcTask"
+                        }
+                    },
+                    {
+                        "$ref": "tchmi:server#/definitions/PLC1._Implicit_Task_Info"
+                    }
+                ]
             },
             "USEMAPPING": true
         },
@@ -2510,6 +3834,40 @@
             },
             "USEMAPPING": true
         },
+        "PLC1.GVL_HMI.bCabinCallsInside": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_HMI::bCabinCallsInside",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "comment": "HMI Internal Cabin Buttons"
+                    },
+                    {
+                        "$ref": "tchmi:server#/definitions/PLC1.ARRAY_1..10_OF-BOOL"
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "PLC1.GVL_HMI.bHmiMovingUp": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_HMI::bHmiMovingUp",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "comment": "Cabin is moving up"
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
         "RefreshDefinitions": {
             "ACCESS": 3,
             "DOMAIN": "TcHmiSrv",
@@ -3406,6 +4764,26 @@
                 "ADS.AdsSyncReadStateReq": 3,
                 "ADS.CheckLicense": 3,
                 "ADS.Diagnostics": 1,
+                "ADS.PLC1.GVL_HMI.bFloorCallsOutside": 3,
+                "ADS.PLC1.GVL_HMI.bHmiMovingDown": 3,
+                "ADS.PLC1.GVL_HMI.bHmiObstruction": 3,
+                "ADS.PLC1.GVL_HMI.eHmiDoorState": 3,
+                "ADS.PLC1.GVL_HMI.nHmiCurrentFloor": 3,
+                "ADS.PLC1.GVL_HMI.nHmiTargetFloor": 3,
+                "ADS.PLC1.GVL_HMI.rfHmiCabinPosition": 3,
+                "ADS.PLC1.Global_Version.stLibVersion_Tc2_Standard": 3,
+                "ADS.PLC1.Global_Version.stLibVersion_Tc2_System": 3,
+                "ADS.PLC1.Global_Version.stLibVersion_Tc3_Module": 3,
+                "ADS.PLC1.MAIN.bRunTestCases": 3,
+                "ADS.PLC1.MAIN.fbCar": 3,
+                "ADS.PLC1.MAIN.fbDispatcher": 3,
+                "ADS.PLC1.MAIN.iTest": 3,
+                "ADS.PLC1.MAIN.nTestStep": 3,
+                "ADS.PLC1.TwinCAT_SystemInfoVarList._AppInfo": 3,
+                "ADS.PLC1.TwinCAT_SystemInfoVarList._TaskInfo": 3,
+                "ADS.PLC1.TwinCAT_SystemInfoVarList._TaskOid_PlcTask": 3,
+                "ADS.PLC1.TwinCAT_SystemInfoVarList._TaskPouOid_PlcTask": 3,
+                "ADS.PLC1.TwinCAT_SystemInfoVarList.__PlcTask": 3,
                 "ChangeUserSettings": 3,
                 "ConfirmAlarm": 3,
                 "CreateEvent": 3,
@@ -3429,6 +4807,8 @@
                 "LocalizeText": 3,
                 "Login": 3,
                 "Logout": 3,
+                "PLC1.GVL_HMI.bCabinCallsInside": 3,
+                "PLC1.GVL_HMI.bHmiMovingUp": 3,
                 "SetLocale": 3,
                 "SubscribeEvents": 3,
                 "TcHmiSqliteLogger.Diagnostics": 1,

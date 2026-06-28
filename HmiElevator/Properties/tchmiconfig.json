@@ -50,6 +50,16 @@
       "name": "Fonts/Fonts.css",
       "description": "",
       "type": "Stylesheet"
+    },
+    {
+      "name": "custom.js",
+      "description": "",
+      "type": "JavaScript"
+    },
+    {
+      "name": "custom.css",
+      "description": "",
+      "type": "Stylesheet"
     }
   ],
   "userControls": [],

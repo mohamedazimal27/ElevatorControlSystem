@@ -27,6 +27,9 @@
     <HmiViewportUserScaleable>Default</HmiViewportUserScaleable>
     <HmiPostProcessing>True</HmiPostProcessing>
     <Name>HmiElevator</Name>
+    <HmiCommunicationServerAuthPort>13000</HmiCommunicationServerAuthPort>
+    <HmiRecent>1.12.762.57</HmiRecent>
+    <HmiServerNodeAdvancedView>False</HmiServerNodeAdvancedView>
   </PropertyGroup>
   <PropertyGroup>
     <TwinCATHmi_Tasks>$(TcHmiDirectory)\MSBuild\Beckhoff.TwinCAT.HMI.tasks</TwinCATHmi_Tasks>
@@ -105,19 +108,51 @@
   <Target Name="Clean" DependsOnTargets="$(CleanDependsOn)" />
   <Target Name="ReBuild" DependsOnTargets="Clean; Build" />
   <ItemGroup>
+    <Folder Include="Fonts\" />
     <Folder Include="Images" />
     <Folder Include="Images\Manifest" />
     <Folder Include="Imports" />
     <Folder Include="Imports\Images" />
     <Folder Include="Imports\Videos" />
+    <Folder Include="KeyboardLayouts\" />
     <Folder Include="Localization" />
     <Folder Include="Themes" />
+    <Folder Include="Themes\Base-Dark\Images\" />
     <Folder Include="Themes\Base\" />
     <Folder Include="Themes\Base-Dark\" />
-    <Folder Include="Server" />
+    <Folder Include="Server">
+      <WorkingDirectory>HmiElevator</WorkingDirectory>
+    </Folder>
     <Folder Include="Properties" />
     <Content Include=".eslintrc.json">
       <Visible>false</Visible>
+    </Content>
+    <Content Include="Server\TcHmiLua\TcHmiLua.Config.default.json">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Server\TcHmiLua\TcHmiLua.Config.remote.json">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Server\TcHmiLua\TcHmiLua.Storage.json">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Server\TcHmiSqliteLogger\TcHmiSqliteLogger.Config.default.json">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Server\TcHmiSqliteLogger\TcHmiSqliteLogger.Config.remote.json">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Server\TcHmiSqliteLogger\TcHmiSqliteLogger.Storage.json">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Server\TcHmiUserManagement\TcHmiUserManagement.Config.default.json">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Server\TcHmiUserManagement\TcHmiUserManagement.Config.remote.json">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Server\TcHmiUserManagement\TcHmiUserManagement.Storage.json">
+      <SubType>Content</SubType>
     </Content>
     <Content Include="tsconfig.tpl.json">
       <SubType>Content</SubType>
@@ -300,6 +335,14 @@
       <SubType>Content</SubType>
       <Visible>true</Visible>
     </Content>
+    <Content Include="custom.css">
+      <SubType>Content</SubType>
+      <Visible>true</Visible>
+    </Content>
+    <Content Include="custom.js">
+      <SubType>Content</SubType>
+      <Visible>true</Visible>
+    </Content>
     <Folder Include="Server\ADS\" />
     <Folder Include="Server\TcHmiLua\" />
     <Folder Include="Server\TcHmiSqliteLogger\" />
@@ -359,6 +402,7 @@
       <SubType>Content</SubType>
       <Visible>false</Visible>
     </Content>
+    <Folder Include="Themes\Base\Images\" />
   </ItemGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

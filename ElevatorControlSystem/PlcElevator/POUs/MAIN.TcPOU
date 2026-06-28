@@ -3,11 +3,70 @@
   <POU Name="MAIN" Id="{44d9e061-88c7-4304-9a8b-ad151f405f39}">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
+	fbCar : FB_ElevatorCar;
+	fbDispatcher : FB_Dispatcher;
+
+	// Automated Test Harness
+	bRunTestCases : BOOL := FALSE;
+	nTestStep : INT := 0;
+	iTest : INT;
 END_VAR
 ]]>
     </Declaration>
     <Implementation>
-      <ST><![CDATA[]]></ST>
+      <ST><![CDATA[// Execute the physical elevator cabin simulation and door state machine
+fbCar();
+
+// Execute dispatcher to run SCAN sorting algorithm
+fbDispatcher.Update(fbCar);
+
+// Bind local state feedbacks to GVL_HMI for HMI animation and telemetry
+GVL_HMI.rfHmiCabinPosition := fbCar.Position;
+GVL_HMI.nHmiCurrentFloor   := fbCar.CurrentFloor;
+GVL_HMI.eHmiDoorState      := TO_INT(fbCar.DoorState);
+GVL_HMI.bHmiMovingUp       := fbDispatcher.bMovingUp;
+GVL_HMI.bHmiMovingDown     := fbDispatcher.bMovingDown;
+GVL_HMI.nHmiTargetFloor    := fbDispatcher.nTargetFloor;
+
+// Automated Test Runner (Self-Verification)
+IF bRunTestCases THEN
+	CASE nTestStep OF
+		0: // Step 0: Initialize test, clear all calls, reset cabin to floor 1
+			FOR iTest := 1 TO 10 DO
+				GVL_HMI.bFloorCallsOutside[iTest] := FALSE;
+				GVL_HMI.bCabinCallsInside[iTest] := FALSE;
+			END_FOR
+			fbCar.MoveToFloor(1);
+			nTestStep := 1;
+			
+		1: // Step 1: Wait for cabin to reach floor 1 and become idle
+			IF fbCar.CurrentFloor = 1 AND NOT fbCar.IsBusy THEN
+				// Place calls at floor 10 and floor 5
+				GVL_HMI.bFloorCallsOutside[10] := TRUE;
+				GVL_HMI.bFloorCallsOutside[5]  := TRUE;
+				nTestStep := 2;
+			END_IF
+			
+		2: // Step 2: Verify it stops at Floor 5 on the way up and clears call
+			IF fbCar.CurrentFloor = 5 AND fbCar.DoorState = E_DoorState.OPEN THEN
+				IF NOT GVL_HMI.bFloorCallsOutside[5] THEN
+					// Floor 5 stop verified and call cleared successfully!
+					nTestStep := 3;
+				END_IF
+			END_IF
+			
+		3: // Step 3: Wait for cabin to reach Floor 10 and clear call
+			IF fbCar.CurrentFloor = 10 AND fbCar.DoorState = E_DoorState.OPEN THEN
+				IF NOT GVL_HMI.bFloorCallsOutside[10] THEN
+					// Floor 10 stop verified and call cleared successfully!
+					// Test passed!
+					bRunTestCases := FALSE;
+					nTestStep := 0;
+				END_IF
+			END_IF
+	END_CASE
+END_IF
+]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

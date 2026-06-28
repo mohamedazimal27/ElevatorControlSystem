@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_Dispatcher" Id="{55e88bb2-932f-410a-b28b-b8736199a099}">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_Dispatcher
+VAR
+	bMovingUp : BOOL := FALSE;
+	bMovingDown : BOOL := FALSE;
+	nTargetFloor : INT := 0; // 0 means no target (idle)
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Update" Id="{b123bb12-cc88-4fb3-8123-d98c2182ca9f}">
+      <Declaration><![CDATA[METHOD Update : BOOL
+VAR_INPUT
+	refCar : I_ElevatorCar;
+END_VAR
+VAR
+	rfPos : LREAL;
+	nCurrentFloor : INT;
+	bHasCallsAhead : BOOL;
+	bHasCallsBehind : BOOL;
+	nNextTarget : INT;
+	i : INT;
+	bCallActive : BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF refCar = 0 THEN // Null check for interface
+	Update := FALSE;
+	RETURN;
+END_IF
+
+rfPos := refCar.Position;
+nCurrentFloor := refCar.CurrentFloor;
+
+// 1. Clear calls on current floor if the doors are open/opening/closing
+IF nTargetFloor <> 0 AND nCurrentFloor = nTargetFloor AND refCar.DoorState <> E_DoorState.CLOSED THEN
+	GVL_HMI.bFloorCallsOutside[nTargetFloor] := FALSE;
+	GVL_HMI.bCabinCallsInside[nTargetFloor] := FALSE;
+END_IF
+
+// 2. SCAN Algorithm State Machine
+IF NOT bMovingUp AND NOT bMovingDown THEN
+	// Idle State: scan for ANY call
+	nNextTarget := 0;
+	
+	FOR i := 1 TO 10 DO
+		bCallActive := GVL_HMI.bFloorCallsOutside[i] OR GVL_HMI.bCabinCallsInside[i];
+		IF bCallActive THEN
+			nNextTarget := i;
+			EXIT; // Grab the first call we find
+		END_IF
+	END_FOR
+	
+	IF nNextTarget <> 0 THEN
+		IF nNextTarget = nCurrentFloor THEN
+			// Call is on current floor: just open the doors
+			refCar.OpenDoors();
+			GVL_HMI.bFloorCallsOutside[nNextTarget] := FALSE;
+			GVL_HMI.bCabinCallsInside[nNextTarget] := FALSE;
+		ELSIF nNextTarget > nCurrentFloor THEN
+			bMovingUp := TRUE;
+			nTargetFloor := nNextTarget;
+			refCar.MoveToFloor(nTargetFloor);
+		ELSE
+			bMovingDown := TRUE;
+			nTargetFloor := nNextTarget;
+			refCar.MoveToFloor(nTargetFloor);
+		END_IF
+	ELSE
+		nTargetFloor := 0;
+	END_IF
+	
+ELSIF bMovingUp THEN
+	// Moving Up: find nearest call ahead (above current position)
+	bHasCallsAhead := FALSE;
+	nNextTarget := 0;
+	
+	FOR i := 1 TO 10 DO
+		bCallActive := GVL_HMI.bFloorCallsOutside[i] OR GVL_HMI.bCabinCallsInside[i];
+		IF bCallActive AND INT_TO_LREAL(i) > (rfPos - 0.05) THEN
+			IF NOT bHasCallsAhead OR i < nNextTarget THEN
+				bHasCallsAhead := TRUE;
+				nNextTarget := i;
+			END_IF
+		END_IF
+	END_FOR
+	
+	IF bHasCallsAhead THEN
+		// We have calls ahead in the Up direction: head to the nearest one
+		nTargetFloor := nNextTarget;
+		refCar.MoveToFloor(nTargetFloor);
+	ELSE
+		// No calls ahead: check if there are calls behind/below us
+		bHasCallsBehind := FALSE;
+		nNextTarget := 0;
+		
+		FOR i := 1 TO 10 DO
+			bCallActive := GVL_HMI.bFloorCallsOutside[i] OR GVL_HMI.bCabinCallsInside[i];
+			IF bCallActive AND INT_TO_LREAL(i) < (rfPos + 0.05) THEN
+				IF NOT bHasCallsBehind OR i > nNextTarget THEN // For Down, grab highest floor first
+					bHasCallsBehind := TRUE;
+					nNextTarget := i;
+				END_IF
+			END_IF
+		END_FOR
+		
+		IF bHasCallsBehind THEN
+			// Switch direction to Down
+			bMovingUp := FALSE;
+			bMovingDown := TRUE;
+			nTargetFloor := nNextTarget;
+			refCar.MoveToFloor(nTargetFloor);
+		ELSE
+			// No calls at all: go idle
+			bMovingUp := FALSE;
+			nTargetFloor := 0;
+		END_IF
+	END_IF
+	
+ELSIF bMovingDown THEN
+	// Moving Down: find nearest call ahead (below current position)
+	bHasCallsAhead := FALSE;
+	nNextTarget := 0;
+	
+	FOR i := 1 TO 10 DO
+		bCallActive := GVL_HMI.bFloorCallsOutside[i] OR GVL_HMI.bCabinCallsInside[i];
+		IF bCallActive AND INT_TO_LREAL(i) < (rfPos + 0.05) THEN
+			IF NOT bHasCallsAhead OR i > nNextTarget THEN
+				bHasCallsAhead := TRUE;
+				nNextTarget := i;
+			END_IF
+		END_IF
+	END_FOR
+	
+	IF bHasCallsAhead THEN
+		// We have calls ahead in the Down direction: head to the nearest one
+		nTargetFloor := nNextTarget;
+		refCar.MoveToFloor(nTargetFloor);
+	ELSE
+		// No calls ahead: check if there are calls behind/above us
+		bHasCallsBehind := FALSE;
+		nNextTarget := 0;
+		
+		FOR i := 1 TO 10 DO
+			bCallActive := GVL_HMI.bFloorCallsOutside[i] OR GVL_HMI.bCabinCallsInside[i];
+			IF bCallActive AND INT_TO_LREAL(i) > (rfPos - 0.05) THEN
+				IF NOT bHasCallsBehind OR i < nNextTarget THEN // For Up, grab lowest floor first
+					bHasCallsBehind := TRUE;
+					nNextTarget := i;
+				END_IF
+			END_IF
+		END_FOR
+		
+		IF bHasCallsBehind THEN
+			// Switch direction to Up
+			bMovingDown := FALSE;
+			bMovingUp := TRUE;
+			nTargetFloor := nNextTarget;
+			refCar.MoveToFloor(nTargetFloor);
+		ELSE
+			// No calls at all: go idle
+			bMovingDown := FALSE;
+			nTargetFloor := 0;
+		END_IF
+	END_IF
+END_IF
+
+Update := TRUE;]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

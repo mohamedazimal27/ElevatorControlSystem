@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_ElevatorCar" Id="{88b7762b-932f-410a-b28b-b8736199a099}">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_ElevatorCar IMPLEMENTS I_ElevatorCar
+VAR
+	rfPosition : LREAL := 1.0;
+	nTargetFloor : INT := 1;
+	eDoorState : E_DoorState := E_DoorState.CLOSED;
+	bMoving : BOOL := FALSE;
+	bObstruction : BOOL := FALSE;
+	bTriggerDoorOpen : BOOL := FALSE;
+
+	fbDoorDwellTimer : TON;
+	fbOpeningTimer : TON;
+	fbClosingTimer : TON;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// Synchronize door obstruction from external HMI/safety input
+bObstruction := GVL_HMI.bHmiObstruction;
+
+// Door State Machine
+CASE eDoorState OF
+	E_DoorState.CLOSED:
+		fbOpeningTimer(IN := FALSE);
+		fbDoorDwellTimer(IN := FALSE);
+		fbClosingTimer(IN := FALSE);
+		
+		IF bTriggerDoorOpen THEN
+			bTriggerDoorOpen := FALSE;
+			eDoorState := E_DoorState.OPENING;
+		END_IF
+		
+	E_DoorState.OPENING:
+		fbOpeningTimer(IN := TRUE, PT := T#1S); // 1s opening time
+		IF fbOpeningTimer.Q THEN
+			fbOpeningTimer(IN := FALSE);
+			eDoorState := E_DoorState.OPEN;
+		END_IF
+		
+	E_DoorState.OPEN:
+		fbDoorDwellTimer(IN := NOT bObstruction, PT := T#3S); // 3s dwell timer
+		IF fbDoorDwellTimer.Q THEN
+			fbDoorDwellTimer(IN := FALSE);
+			eDoorState := E_DoorState.CLOSING;
+		END_IF
+		
+	E_DoorState.CLOSING:
+		fbClosingTimer(IN := TRUE, PT := T#1S); // 1s closing time
+		
+		IF bObstruction THEN
+			// Light Curtain obstruction: instantly reverse to OPENING
+			fbClosingTimer(IN := FALSE);
+			eDoorState := E_DoorState.OPENING;
+		ELSIF fbClosingTimer.Q THEN
+			fbClosingTimer(IN := FALSE);
+			eDoorState := E_DoorState.CLOSED;
+		END_IF
+END_CASE
+
+// Cabin Movement Logic (Safety Interlock)
+IF eDoorState = E_DoorState.CLOSED THEN
+	IF rfPosition < INT_TO_LREAL(nTargetFloor) THEN
+		bMoving := TRUE;
+		rfPosition := rfPosition + 0.02;
+		IF rfPosition >= INT_TO_LREAL(nTargetFloor) THEN
+			rfPosition := INT_TO_LREAL(nTargetFloor);
+			bMoving := FALSE;
+			bTriggerDoorOpen := TRUE; // Auto-open doors upon arrival
+		END_IF
+	ELSIF rfPosition > INT_TO_LREAL(nTargetFloor) THEN
+		bMoving := TRUE;
+		rfPosition := rfPosition - 0.02;
+		IF rfPosition <= INT_TO_LREAL(nTargetFloor) THEN
+			rfPosition := INT_TO_LREAL(nTargetFloor);
+			bMoving := FALSE;
+			bTriggerDoorOpen := TRUE; // Auto-open doors upon arrival
+		END_IF
+	ELSE
+		bMoving := FALSE;
+	END_IF
+ELSE
+	// Door is NOT closed - safety interlock: cabin CANNOT move
+	bMoving := FALSE;
+END_IF
+]]></ST>
+    </Implementation>
+    <Method Name="MoveToFloor" Id="{13cf8788-b223-455b-9d88-ee25e4125b6a}">
+      <Declaration><![CDATA[METHOD MoveToFloor : BOOL
+VAR_INPUT
+	nFloor : INT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF nFloor >= 1 AND nFloor <= 10 AND eDoorState = E_DoorState.CLOSED THEN
+	nTargetFloor := nFloor;
+	MoveToFloor := TRUE;
+ELSE
+	MoveToFloor := FALSE;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OpenDoors" Id="{de12ab12-cc88-4fb3-8123-d98c2182ca9f}">
+      <Declaration><![CDATA[METHOD OpenDoors : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT bMoving AND eDoorState = E_DoorState.CLOSED THEN
+	bTriggerDoorOpen := TRUE;
+	OpenDoors := TRUE;
+ELSE
+	OpenDoors := FALSE;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="CurrentFloor" Id="{1d7b32c3-4d51-419b-a010-85f67b5e4a55}">
+      <Declaration><![CDATA[PROPERTY CurrentFloor : INT]]></Declaration>
+      <Get Name="Get" Id="{2d12cc12-9c12-4aa3-8822-ba33cc000cc0}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[CurrentFloor := LREAL_TO_INT(rfPosition);]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="DoorState" Id="{9d55aa66-00cc-49ff-88aa-ca32884cde6c}">
+      <Declaration><![CDATA[PROPERTY DoorState : E_DoorState]]></Declaration>
+      <Get Name="Get" Id="{88cc3322-a9c1-4ba2-86ee-77aab88ddff0}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[DoorState := eDoorState;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="IsBusy" Id="{a7e37cb8-5c4e-4fbf-939e-d1b4020a597a}">
+      <Declaration><![CDATA[PROPERTY IsBusy : BOOL]]></Declaration>
+      <Get Name="Get" Id="{7ecb38b7-4c8d-4f1e-bf01-eb4ce06c9a9d}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IsBusy := bMoving OR (eDoorState <> E_DoorState.CLOSED);]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="Position" Id="{1e7655ab-129b-4ffc-a339-a9a3f2b4ffbd}">
+      <Declaration><![CDATA[PROPERTY Position : LREAL]]></Declaration>
+      <Get Name="Get" Id="{be89f214-7eb3-4df4-8cf5-5f532a129d38}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Position := rfPosition;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>

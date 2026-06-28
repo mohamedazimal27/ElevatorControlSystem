@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.16">
+  <Itf Name="I_ElevatorCar" Id="{952fdf40-2790-410a-8bf3-4fbccf507b9a}">
+    <Declaration><![CDATA[INTERFACE I_ElevatorCar]]></Declaration>
+    <Property Name="CurrentFloor" Id="{131dbda0-87a1-4328-ae76-791724cc634d}">
+      <Declaration><![CDATA[PROPERTY CurrentFloor : INT]]></Declaration>
+      <Get Name="Get" Id="{6033324c-2cb8-472e-8d82-b7e19199d799}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="DoorState" Id="{94320958-3d8a-4c28-be9c-70e67db63b36}">
+      <Declaration><![CDATA[PROPERTY DoorState : E_DoorState]]></Declaration>
+      <Get Name="Get" Id="{049156ef-a339-4d64-8842-fa327a3c3e8e}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="IsBusy" Id="{6c91070e-532b-4333-b317-d5d30ff315f9}">
+      <Declaration><![CDATA[PROPERTY IsBusy : BOOL]]></Declaration>
+      <Get Name="Get" Id="{fd2e763d-6e9e-495d-a434-3b465add218a}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Method Name="MoveToFloor" Id="{7f4c514d-91b4-47c3-88ee-1a939f50e8a7}">
+      <Declaration><![CDATA[METHOD MoveToFloor : BOOL
+VAR_INPUT
+	nFloor : INT;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="OpenDoors" Id="{a98bf3f8-3e4b-4b14-8742-ca37bfab4d7b}">
+      <Declaration><![CDATA[METHOD OpenDoors : BOOL
+]]></Declaration>
+    </Method>
+    <Property Name="Position" Id="{9846ff8e-d883-46a3-95f2-c40b22a5bb78}">
+      <Declaration><![CDATA[PROPERTY Position : LREAL]]></Declaration>
+      <Get Name="Get" Id="{8009cd90-c5f1-4362-999d-1d463cf59b97}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+  </Itf>
+</TcPlcObject>

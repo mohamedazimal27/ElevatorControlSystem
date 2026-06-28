@@ -351,3 +351,5 @@ div[data-tchmi-type="TcHmi.Controls.System.TcHmiView"] {
         .tchmi-view-loading-spinner div:nth-child(3) {
             animation-delay: -0.15s;
         }
+
+@import "../../custom.css";
