@@ -259,3 +259,11 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+
+# TwinCAT 3 / Codesys session lock and temporary files
+*.~u
+*.project.copy
+*.project.lock
+*.compileinfo
+*.bootdata
+*.exp_temp
