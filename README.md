@@ -11,7 +11,7 @@ An industrial-grade, object-oriented elevator control system simulation develope
 ## 📺 Project Showcase
 
 ### 🎥 Watch the Demonstration on YouTube
-[![Watch the video](https://img.shields.io/badge/YouTube-Watch%20Showcase-red?style=for-the-badge&logo=youtube)](https://www.youtube.com/watch?v=YOUR_VIDEO_ID)
+[![Watch the video](https://img.shields.io/badge/YouTube-Watch%20Showcase-red?style=for-the-badge&logo=youtube)](https://www.youtube.com/watch?v=a8VGd4jyrSQ)
 
 *(Click the badge above to watch the demonstration video on YouTube — make sure to replace `YOUR_VIDEO_ID` with your actual YouTube URL)*
 
@@ -40,38 +40,38 @@ The PLC application is structured around a strict separation of concerns, ensuri
 classDiagram
     class I_ElevatorCar {
         <<interface>>
-        +Position : LREAL
-        +CurrentFloor : INT
-        +DoorState : E_DoorState
-        +IsBusy : BOOL
-        +MoveToFloor(nFloor) : BOOL
-        +OpenDoors() : BOOL
+        +LREAL Position
+        +INT CurrentFloor
+        +E_DoorState DoorState
+        +BOOL IsBusy
+        +MoveToFloor(INT nFloor) BOOL
+        +OpenDoors() BOOL
     }
 
     class FB_ElevatorCar {
-        -rfPosition : LREAL
-        -nTargetFloor : INT
-        -eDoorState : E_DoorState
-        -bTriggerDoorOpen : BOOL
-        -fbDoorDwellTimer : TON
-        -fbOpeningTimer : TON
-        -fbClosingTimer : TON
-        +MoveToFloor(nFloor) : BOOL
-        +OpenDoors() : BOOL
+        -LREAL rfPosition
+        -INT nTargetFloor
+        -E_DoorState eDoorState
+        -BOOL bTriggerDoorOpen
+        -TON fbDoorDwellTimer
+        -TON fbOpeningTimer
+        -TON fbClosingTimer
+        +MoveToFloor(INT nFloor) BOOL
+        +OpenDoors() BOOL
     }
 
     class FB_Dispatcher {
-        -bMovingUp : BOOL
-        -bMovingDown : BOOL
-        -nTargetFloor : INT
-        +Update(refCar) : BOOL
+        -BOOL bMovingUp
+        -BOOL bMovingDown
+        -INT nTargetFloor
+        +Update(I_ElevatorCar refCar) BOOL
     }
 
     class MAIN {
-        -fbCar : FB_ElevatorCar
-        -fbDispatcher : FB_Dispatcher
-        -bRunTestCases : BOOL
-        -nTestStep : INT
+        -FB_ElevatorCar fbCar
+        -FB_Dispatcher fbDispatcher
+        -BOOL bRunTestCases
+        -INT nTestStep
     }
 
     I_ElevatorCar <|.. FB_ElevatorCar : Implements
