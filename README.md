@@ -1,4 +1,4 @@
-# Dual-Panel Elevator Control System (TwinCAT 3 + Beckhoff HMI)
+# Elevator Control System (TwinCAT 3 + Beckhoff HMI)
 
 [![Platform: TwinCAT 3](https://img.shields.io/badge/Platform-TwinCAT%203-brightgreen.svg)](https://www.beckhoff.com/twincat3/)
 [![Language: Structured Text (IEC 61131-3)](https://img.shields.io/badge/Language-Structured%20Text-blue.svg)](https://en.wikipedia.org/wiki/Structured_text)
