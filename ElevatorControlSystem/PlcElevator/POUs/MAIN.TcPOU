@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1">
-  <POU Name="MAIN" Id="{44d9e061-88c7-4304-9a8b-ad151f405f39}">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.16">
+  <POU Name="MAIN" Id="{44d9e061-88c7-4304-9a8b-ad151f405f39}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
 	fbCar : FB_ElevatorCar;
@@ -10,9 +10,9 @@ VAR
 	bRunTestCases : BOOL := FALSE;
 	nTestStep : INT := 0;
 	iTest : INT;
+	bResetCalls : BOOL := FALSE;
 END_VAR
-]]>
-    </Declaration>
+]]></Declaration>
     <Implementation>
       <ST><![CDATA[// Execute the physical elevator cabin simulation and door state machine
 fbCar();
@@ -66,7 +66,27 @@ IF bRunTestCases THEN
 			END_IF
 	END_CASE
 END_IF
+
+//Reset All Calls
+IF bResetCalls THEN
+	FOR iTest := 1 TO 10 DO
+				GVL_HMI.bFloorCallsOutside[iTest] := FALSE;
+				GVL_HMI.bCabinCallsInside[iTest] := FALSE;
+	END_FOR
+	fbCar.MoveToFloor(1);
+END_IF
 ]]></ST>
     </Implementation>
+    <LineIds Name="MAIN">
+      <LineId Id="3" Count="51" />
+      <LineId Id="67" Count="0" />
+      <LineId Id="66" Count="0" />
+      <LineId Id="68" Count="0" />
+      <LineId Id="71" Count="2" />
+      <LineId Id="69" Count="0" />
+      <LineId Id="74" Count="0" />
+      <LineId Id="70" Count="0" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
   </POU>
 </TcPlcObject>

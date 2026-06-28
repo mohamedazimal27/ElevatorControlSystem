@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="custom.css">
 
     <!-- HMI Background / Wrapper Container -->
-    <div id="hmi_body_container" data-tchmi-type="TcHmi.Controls.System.TcHmiContainer" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-left="0" data-tchmi-left-unit="px" data-tchmi-top="0" data-tchmi-top-unit="px" data-tchmi-width="100" data-tchmi-width-unit="%" data-tchmi-zindex="1" data-tchmi-class-names='["hmi-body"]'>
+    <div id="hmi_body_container" data-tchmi-type="TcHmi.Controls.System.TcHmiContainer" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-left="0" data-tchmi-left-unit="px" data-tchmi-top="0" data-tchmi-top-unit="px" data-tchmi-width="100" data-tchmi-width-unit="%" data-tchmi-zindex="1" >
 
         <!-- HEADER BAR -->
         <div id="hmi_header" data-tchmi-type="TcHmi.Controls.System.TcHmiContainer" data-tchmi-height="60" data-tchmi-height-unit="px" data-tchmi-left="20" data-tchmi-left-unit="px" data-tchmi-top="10" data-tchmi-top-unit="px" data-tchmi-width="1240" data-tchmi-width-unit="px" data-tchmi-zindex="2">
@@ -32,32 +32,20 @@
             <div id="lbl_sys_status" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-text="System Status:" data-tchmi-left="20" data-tchmi-top="15" data-tchmi-width="100" data-tchmi-height="20" data-tchmi-text-font-weight="Bold"></div>
             <div id="val_sys_status" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-text="NORMAL OPERATION" data-tchmi-left="120" data-tchmi-top="15" data-tchmi-width="150" data-tchmi-height="20" data-tchmi-text-font-weight="Bold"></div>
 
-            <!-- Alarm Status -->
-            <div id="lbl_alarm_status" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-text="Alarm Status:" data-tchmi-left="300" data-tchmi-top="15" data-tchmi-width="100" data-tchmi-height="20" data-tchmi-text-font-weight="Bold"></div>
-            <div id="val_alarm_status" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-text="NO ACTIVE ALARM" data-tchmi-left="400" data-tchmi-top="15" data-tchmi-width="150" data-tchmi-height="20" data-tchmi-text-font-weight="Bold"></div>
-
-            <!-- System Ready -->
-            <div id="lbl_sys_ready" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-text="System Ready:" data-tchmi-left="600" data-tchmi-top="15" data-tchmi-width="100" data-tchmi-height="20" data-tchmi-text-font-weight="Bold"></div>
-            <div id="ind_sys_ready" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-text="●" data-tchmi-left="700" data-tchmi-top="15" data-tchmi-width="30" data-tchmi-height="20" data-tchmi-text-font-size="18"></div>
-
-            <!-- Traffic Mode -->
-            <div id="lbl_traffic_mode" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-text="Traffic Mode:" data-tchmi-left="800" data-tchmi-top="15" data-tchmi-width="100" data-tchmi-height="20" data-tchmi-text-font-weight="Bold"></div>
-            <div id="val_traffic_mode" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-text="NORMAL" data-tchmi-left="900" data-tchmi-top="15" data-tchmi-width="80" data-tchmi-height="20" data-tchmi-text-font-weight="Bold"></div>
-
             <!-- Active Elevator -->
             <div id="lbl_active_elevator" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-text="Active Cabin:" data-tchmi-left="1020" data-tchmi-top="15" data-tchmi-width="100" data-tchmi-height="20" data-tchmi-text-font-weight="Bold"></div>
             <div id="val_active_elevator" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-text="ELEVATOR 1" data-tchmi-left="1120" data-tchmi-top="15" data-tchmi-width="100" data-tchmi-height="20" data-tchmi-text-font-weight="Bold" data-tchmi-text-horizontal-alignment="Center" data-tchmi-class-names='["active-cabin-badge"]'></div>
         </div>
 
         <!-- MAIN 3-COLUMN WRAPPER -->
-        <div id="main_dashboard_grid" data-tchmi-type="TcHmi.Controls.System.TcHmiContainer" data-tchmi-height="630" data-tchmi-height-unit="px" data-tchmi-left="20" data-tchmi-left-unit="px" data-tchmi-top="140" data-tchmi-top-unit="px" data-tchmi-width="1240" data-tchmi-width-unit="px" data-tchmi-zindex="2" data-tchmi-class-names='["dashboard-grid"]'>
+        <div id="main_dashboard_grid" data-tchmi-type="TcHmi.Controls.System.TcHmiContainer" data-tchmi-height="630" data-tchmi-height-unit="px" data-tchmi-left="20" data-tchmi-left-unit="px" data-tchmi-top="140" data-tchmi-top-unit="px" data-tchmi-width="1240" data-tchmi-width-unit="px" data-tchmi-zindex="2" >
 
             <!-- COLUMN 1: Visual Shaft Panel -->
             <div id="shaft_panel" data-tchmi-type="TcHmi.Controls.System.TcHmiContainer" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-left="0" data-tchmi-left-unit="px" data-tchmi-top="0" data-tchmi-top-unit="px" data-tchmi-width="320" data-tchmi-width-unit="px" data-tchmi-zindex="2" data-tchmi-class-names='["panel-card"]'>
                 <div id="shaft_title" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="30" data-tchmi-height-unit="px" data-tchmi-left="20" data-tchmi-left-unit="px" data-tchmi-top="15" data-tchmi-top-unit="px" data-tchmi-width="280" data-tchmi-width-unit="px" data-tchmi-text="Elevator Shaft" data-tchmi-class-names='["panel-title"]' data-tchmi-zindex="2"></div>
 
                 <!-- Combined Shaft Container -->
-                <div id="shaft_container" data-tchmi-type="TcHmi.Controls.System.TcHmiContainer" data-tchmi-height="510" data-tchmi-height-unit="px" data-tchmi-left="30" data-tchmi-left-unit="px" data-tchmi-top="60" data-tchmi-top-unit="px" data-tchmi-width="260" data-tchmi-width-unit="px" data-tchmi-zindex="2" data-tchmi-class-names='["shaft-container"]'>
+                <div id="shaft_container" data-tchmi-type="TcHmi.Controls.System.TcHmiContainer" data-tchmi-height="510" data-tchmi-height-unit="px" data-tchmi-left="30" data-tchmi-left-unit="px" data-tchmi-top="60" data-tchmi-top-unit="px" data-tchmi-width="260" data-tchmi-width-unit="px" data-tchmi-zindex="2" >
 
                     <!-- LEFT SIDE: Floor block indicators (10 down to 1) -->
                     <div id="floor_blocks_container" data-tchmi-type="TcHmi.Controls.System.TcHmiContainer" data-tchmi-left="10" data-tchmi-top="10" data-tchmi-width="110" data-tchmi-height="490">
@@ -77,20 +65,44 @@
                     <div id="cabin_rail_container" data-tchmi-type="TcHmi.Controls.System.TcHmiContainer" data-tchmi-left="130" data-tchmi-top="10" data-tchmi-width="120" data-tchmi-height="490" data-tchmi-class-names='["rail-track"]'>
                         <!-- Smooth moving cabin -->
                         <div id="hmi_cabin" data-tchmi-type="TcHmi.Controls.System.TcHmiContainer" data-tchmi-height="42" data-tchmi-height-unit="px" data-tchmi-left="10" data-tchmi-left-unit="px" data-tchmi-top="423" data-tchmi-top-unit="px" data-tchmi-width="100" data-tchmi-width-unit="px" data-tchmi-zindex="3" data-tchmi-class-names='["elevator-cabin", "door-state-closed"]'>
-                            <div id="door_left" data-tchmi-type="TcHmi.Controls.System.TcHmiContainer" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-left="0" data-tchmi-left-unit="px" data-tchmi-top="0" data-tchmi-top-unit="px" data-tchmi-width="50" data-tchmi-width-unit="%" data-tchmi-zindex="1" data-tchmi-class-names='["cabin-door", "left"]'></div>
-                            <div id="door_right" data-tchmi-type="TcHmi.Controls.System.TcHmiContainer" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-left="50" data-tchmi-left-unit="%" data-tchmi-top="0" data-tchmi-top-unit="px" data-tchmi-width="50" data-tchmi-width-unit="%" data-tchmi-zindex="1" data-tchmi-class-names='["cabin-door", "right"]'></div>
+                            <div id="door_left" data-tchmi-type="TcHmi.Controls.System.TcHmiContainer" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-left="0" data-tchmi-left-unit="px" data-tchmi-top="0" data-tchmi-top-unit="px" data-tchmi-width="50" data-tchmi-width-unit="%" data-tchmi-zindex="1" >
+<script data-tchmi-target-attribute="data-tchmi-class-names" type="application/json">
+["cabin-door", "left"]
+</script>
+
+<script data-tchmi-target-attribute="data-tchmi-background-color" type="application/json">
+{
+  "color": "rgba(0, 0, 0, 1)"
+}
+</script>
+</div>
+                            <div id="door_right" data-tchmi-type="TcHmi.Controls.System.TcHmiContainer" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-left="50" data-tchmi-left-unit="%" data-tchmi-top="0" data-tchmi-top-unit="px" data-tchmi-width="50" data-tchmi-width-unit="%" data-tchmi-zindex="1" >
+<script data-tchmi-target-attribute="data-tchmi-class-names" type="application/json">
+["cabin-door", "right"]
+</script>
+
+<script data-tchmi-target-attribute="data-tchmi-background-color" type="application/json">
+{
+  "color": "rgba(0, 0, 0, 1)"
+}
+</script>
+</div>
                         </div>
                     </div>
 
-                </div>
+                
+<script data-tchmi-target-attribute="data-tchmi-class-names" type="application/json">
+["shaft-container"]
+</script>
+</div>
             </div>
 
             <!-- COLUMN 2: Telemetry & Detail Status Panel -->
-            <div id="telemetry_panel_card" data-tchmi-type="TcHmi.Controls.System.TcHmiContainer" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-left="340" data-tchmi-left-unit="px" data-tchmi-top="0" data-tchmi-top-unit="px" data-tchmi-width="540" data-tchmi-width-unit="px" data-tchmi-zindex="2" data-tchmi-class-names='["panel-card"]'>
+            <div id="telemetry_panel_card" data-tchmi-type="TcHmi.Controls.System.TcHmiContainer" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-left="340" data-tchmi-left-unit="px" data-tchmi-top="0" data-tchmi-top-unit="px" data-tchmi-width="540" data-tchmi-width-unit="px" data-tchmi-zindex="2" >
                 <div id="tele_title" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="30" data-tchmi-height-unit="px" data-tchmi-left="20" data-tchmi-left-unit="px" data-tchmi-top="15" data-tchmi-top-unit="px" data-tchmi-width="500" data-tchmi-width-unit="px" data-tchmi-text="ELEVATOR 1 STATUS &amp; METRICS" data-tchmi-class-names='["panel-title"]' data-tchmi-zindex="2"></div>
 
                 <!-- Large Telemetry Block -->
-                <div id="telemetry_dashboard" data-tchmi-type="TcHmi.Controls.System.TcHmiContainer" data-tchmi-height="130" data-tchmi-left="20" data-tchmi-top="60" data-tchmi-width="500" data-tchmi-class-names='["telemetry-display-container"]'>
+                <div id="telemetry_dashboard" data-tchmi-type="TcHmi.Controls.System.TcHmiContainer" data-tchmi-height="130" data-tchmi-left="20" data-tchmi-top="60" data-tchmi-width="500" >
                     <!-- Direction -->
                     <div id="box_direction" data-tchmi-type="TcHmi.Controls.System.TcHmiContainer" data-tchmi-left="20" data-tchmi-top="15" data-tchmi-width="120" data-tchmi-height="100" >
                         <div id="lbl_dir" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-left="0" data-tchmi-top="10" data-tchmi-width="120" data-tchmi-height="20" data-tchmi-text="Direction" data-tchmi-class-names='["box-label"]'></div>
@@ -114,68 +126,81 @@
                         </div>
                     </div>
                     <!-- Target Floor -->
-                    <div id="box_target_floor" data-tchmi-type="TcHmi.Controls.System.TcHmiContainer" data-tchmi-left="350" data-tchmi-top="15" data-tchmi-width="130" data-tchmi-height="100" data-tchmi-class-names='["dashboard-box"]'>
+                    <div id="box_target_floor" data-tchmi-type="TcHmi.Controls.System.TcHmiContainer" data-tchmi-left="350" data-tchmi-top="15" data-tchmi-width="130" data-tchmi-height="100" >
                         <div id="lbl_target_flr" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-left="0" data-tchmi-top="10" data-tchmi-width="130" data-tchmi-height="20" data-tchmi-text="Target Floor" data-tchmi-class-names='["box-label"]'></div>
                         <div id="val_target_floor" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-left="0" data-tchmi-top="35" data-tchmi-width="130" data-tchmi-height="60" data-tchmi-text="%s%ADS.PLC1.GVL_HMI.nHmiTargetFloor%/s%">
                             <script data-tchmi-target-attribute="data-tchmi-class-names" type="application/json">
                                 ["box-value-huge", "target-highlight"]
                             </script>
                         </div>
-                    </div>
+                    
+<script data-tchmi-target-attribute="data-tchmi-class-names" type="application/json">
+["dashboard-box"]
+</script>
+</div>
                 </div>
 
                 <!-- Detail Metrics Table -->
-                <div id="metrics_table_container" data-tchmi-type="TcHmi.Controls.System.TcHmiContainer" data-tchmi-height="220" data-tchmi-left="20" data-tchmi-top="210" data-tchmi-width="500" data-tchmi-class-names='["metrics-table"]'>
-                    <!-- Row 1: Position & Speed -->
+                <div id="metrics_table_container" data-tchmi-type="TcHmi.Controls.System.TcHmiContainer" data-tchmi-height="120" data-tchmi-left="20" data-tchmi-top="210" data-tchmi-width="500" data-tchmi-class-names='["metrics-table"]'>
+                    <!-- Row 1: Position -->
                     <div id="row_pos_load" data-tchmi-type="TcHmi.Controls.System.TcHmiContainer" data-tchmi-left="10" data-tchmi-top="10" data-tchmi-width="480" data-tchmi-height="40" data-tchmi-class-names='["metrics-row"]'>
                         <div id="lbl_pos" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-text="Cabin Position:" data-tchmi-left="15" data-tchmi-top="10" data-tchmi-width="150" data-tchmi-height="20"></div>
-                        <div id="telemetry_pos" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-text="1.00 m" data-tchmi-left="180" data-tchmi-top="10" data-tchmi-width="100" data-tchmi-height="20" data-tchmi-text-font-weight="Bold" data-tchmi-class-names='["pos-text"]'></div>
-                        <div id="lbl_speed" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-text="Speed:" data-tchmi-left="300" data-tchmi-top="10" data-tchmi-width="80" data-tchmi-height="20"></div>
-                        <div id="telemetry_speed" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-text="0.00 m/s" data-tchmi-left="390" data-tchmi-top="10" data-tchmi-width="80" data-tchmi-height="20" data-tchmi-text-font-weight="Bold" data-tchmi-class-names='["speed-text"]'></div>
+                        <div id="telemetry_pos" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-text="%s%ADS.PLC1.GVL_HMI.rfHmiCabinPosition%/s%" data-tchmi-left="180" data-tchmi-top="10" data-tchmi-width="100" data-tchmi-height="20" data-tchmi-text-font-weight="Bold" >
+<script data-tchmi-target-attribute="data-tchmi-class-names" type="application/json">
+["pos-text"]
+</script>
+</div>
                     </div>
 
-                    <!-- Row 2: Door State & Load -->
+                    <!-- Row 2: Door State -->
                     <div id="row_door_obstruction" data-tchmi-type="TcHmi.Controls.System.TcHmiContainer" data-tchmi-left="10" data-tchmi-top="60" data-tchmi-width="480" data-tchmi-height="40" data-tchmi-class-names='["metrics-row"]'>
                         <div id="lbl_door" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-text="Door Status:" data-tchmi-left="15" data-tchmi-top="10" data-tchmi-width="150" data-tchmi-height="20"></div>
-                        <div id="telemetry_door" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-text="CLOSED" data-tchmi-left="180" data-tchmi-top="10" data-tchmi-width="100" data-tchmi-height="20" data-tchmi-text-font-weight="Bold" data-tchmi-class-names='["door-text"]'></div>
-                        <div id="lbl_load" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-text="Load State:" data-tchmi-left="300" data-tchmi-top="10" data-tchmi-width="80" data-tchmi-height="20"></div>
-                        <div id="telemetry_load" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-text="0 kg" data-tchmi-left="390" data-tchmi-top="10" data-tchmi-width="80" data-tchmi-height="20" data-tchmi-text-font-weight="Bold" data-tchmi-class-names='["load-text"]'></div>
-                    </div>
-
-                    <!-- Row 3: Door Timer & Safety -->
-                    <div id="row_timer_safety" data-tchmi-type="TcHmi.Controls.System.TcHmiContainer" data-tchmi-left="10" data-tchmi-top="110" data-tchmi-width="480" data-tchmi-height="40" data-tchmi-class-names='["metrics-row"]'>
-                        <div id="lbl_timer" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-text="Door Dwell Timer:" data-tchmi-left="15" data-tchmi-top="10" data-tchmi-width="150" data-tchmi-height="20"></div>
-                        <div id="telemetry_timer" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-text="0.0 s" data-tchmi-left="180" data-tchmi-top="10" data-tchmi-width="100" data-tchmi-height="20" data-tchmi-text-font-weight="Bold"></div>
-                        <div id="lbl_safety" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-text="Safety Interlock:" data-tchmi-left="300" data-tchmi-top="10" data-tchmi-width="100" data-tchmi-height="20"></div>
-                        <div id="telemetry_safety" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-text="OK" data-tchmi-left="410" data-tchmi-top="10" data-tchmi-width="60" data-tchmi-height="20" data-tchmi-text-font-weight="Bold" data-tchmi-class-names='["safety-text"]'></div>
-                    </div>
-
-                    <!-- Row 4: Status / Active Alarms -->
-                    <div id="row_alarms" data-tchmi-type="TcHmi.Controls.System.TcHmiContainer" data-tchmi-left="10" data-tchmi-top="160" data-tchmi-width="480" data-tchmi-height="50" data-tchmi-class-names='["metrics-row", "alarms-display"]'>
-                        <div id="lbl_alarms" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-text="ELEVATOR ALARMS" data-tchmi-left="15" data-tchmi-top="15" data-tchmi-width="150" data-tchmi-height="20" data-tchmi-text-font-weight="Bold"></div>
-                        <div id="telemetry_alarms" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-text="No Active Alarm" data-tchmi-left="180" data-tchmi-top="15" data-tchmi-width="280" data-tchmi-height="20" data-tchmi-text-font-weight="Bold" data-tchmi-class-names='["alarms-text"]'></div>
+                        <div id="telemetry_door" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-text="%s%ADS.PLC1.GVL_HMI.eHmiDoorState%/s%" data-tchmi-left="180" data-tchmi-top="10" data-tchmi-width="100" data-tchmi-height="20" data-tchmi-text-font-weight="Bold" >
+<script data-tchmi-target-attribute="data-tchmi-class-names" type="application/json">
+["door-text"]
+</script>
+</div>
                     </div>
                 </div>
 
                 <!-- System Controls Card -->
-                <div id="sys_controls_container" data-tchmi-type="TcHmi.Controls.System.TcHmiContainer" data-tchmi-height="150" data-tchmi-left="20" data-tchmi-top="445" data-tchmi-width="500" data-tchmi-class-names='["system-controls-box"]'>
+                <div id="sys_controls_container" data-tchmi-type="TcHmi.Controls.System.TcHmiContainer" data-tchmi-height="150" data-tchmi-left="20" data-tchmi-top="350" data-tchmi-width="500" data-tchmi-class-names='["system-controls-box"]'>
                     <div id="sys_ctrl_title" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-text="SYSTEM COMMANDS" data-tchmi-left="15" data-tchmi-top="15" data-tchmi-width="180" data-tchmi-height="20" data-tchmi-text-font-weight="Bold"></div>
 
-                    <div id="btn_clear_calls" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-text="Clear All Calls" data-tchmi-left="15" data-tchmi-top="45" data-tchmi-width="150" data-tchmi-height="40" data-tchmi-class-names='["control-action-btn"]'></div>
+                    <div id="btn_clear_calls" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-text="Clear All Calls" data-tchmi-left="15" data-tchmi-top="45" data-tchmi-width="150" data-tchmi-height="40"  data-tchmi-state-symbol="%s%PLC1.MAIN.bResetCalls%/s%">
+<script data-tchmi-target-attribute="data-tchmi-class-names" type="application/json">
+["control-action-btn"]
+</script>
+</div>
                     <div id="btn_trigger_test" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-text="Trigger Test Run" data-tchmi-left="180" data-tchmi-top="45" data-tchmi-width="150" data-tchmi-height="40" data-tchmi-state-symbol="%s%ADS.PLC1.MAIN.bRunTestCases%/s%">
 <script data-tchmi-target-attribute="data-tchmi-class-names" type="application/json">
 ["control-action-btn"]
 </script>
 </div>
-                    <div id="btn_emergency_stop" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-text="Emergency Stop" data-tchmi-left="345" data-tchmi-top="45" data-tchmi-width="140" data-tchmi-height="40" >
+
+                    <div id="test_status_text" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-text="Harness: Ready" data-tchmi-left="15" data-tchmi-top="100" data-tchmi-width="470" data-tchmi-height="30" >
 <script data-tchmi-target-attribute="data-tchmi-class-names" type="application/json">
-["control-action-btn", "emergency-btn"]
+["harness-label"]
 </script>
 </div>
-
-                    <div id="test_status_text" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-text="Harness: Ready" data-tchmi-left="15" data-tchmi-top="100" data-tchmi-width="470" data-tchmi-height="30" data-tchmi-class-names='["harness-label"]'></div>
                 </div>
-            </div>
+            
+<script data-tchmi-target-attribute="data-tchmi-class-names" type="application/json">
+["panel-card"]
+</script>
+<div id="obstruction_box" data-tchmi-type="TcHmi.Controls.System.TcHmiContainer" data-tchmi-height="70" data-tchmi-left="22" data-tchmi-top="532" data-tchmi-width="315">
+<div id="lbl_obstruction" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-text="LIGHT CURTAIN OBSTRUCTION" data-tchmi-class-names='["obstruction-label"]' data-tchmi-width="190" data-tchmi-height="30" data-tchmi-left="10" data-tchmi-top="20">
+
+</div>
+
+                    <!-- Native Toggle Switch Control -->
+                    <div id="obstruction_toggle" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiToggleSwitch" data-tchmi-width="60" data-tchmi-height="26" data-tchmi-left="220" data-tchmi-top="22" data-tchmi-zindex="2" data-tchmi-toggle-state="%s%ADS.PLC1.GVL_HMI.bHmiObstruction%/s%"></div>
+                
+<script data-tchmi-target-attribute="data-tchmi-class-names" type="application/json">
+["obstruction-control"]
+</script>
+</div>
+</div>
 
             <!-- COLUMN 3: Calls & Interaction Grid -->
             <div id="calls_panel" data-tchmi-type="TcHmi.Controls.System.TcHmiContainer" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-left="895" data-tchmi-left-unit="px" data-tchmi-top="0" data-tchmi-top-unit="px" data-tchmi-width="345" data-tchmi-width-unit="px" data-tchmi-zindex="2" data-tchmi-class-names='["panel-card"]'>
@@ -185,17 +210,17 @@
 
                 <!-- Landing Call button panel (1..10) -->
                 <div id="landing_calls_grid" data-tchmi-type="TcHmi.Controls.System.TcHmiContainer" data-tchmi-height="180" data-tchmi-left="15" data-tchmi-top="45" data-tchmi-width="315" data-tchmi-class-names='["calls-button-grid"]'>
-                    <div id="landing_btn_1" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-text="1" data-tchmi-class-names='["call-btn"]' data-tchmi-width="45" data-tchmi-height="45" data-tchmi-left="10" data-tchmi-top="10" data-tchmi-state-symbol="%s%ADS.PLC1.GVL_HMI.bFloorCallsOutside[0]%/s%"></div>
-                    <div id="landing_btn_2" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-text="2" data-tchmi-class-names='["call-btn"]' data-tchmi-width="45" data-tchmi-height="45" data-tchmi-left="70" data-tchmi-top="10" data-tchmi-state-symbol="%s%ADS.PLC1.GVL_HMI.bFloorCallsOutside[1]%/s%"></div>
-                    <div id="landing_btn_3" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-text="3" data-tchmi-class-names='["call-btn"]' data-tchmi-width="45" data-tchmi-height="45" data-tchmi-left="130" data-tchmi-top="10" data-tchmi-state-symbol="%s%ADS.PLC1.GVL_HMI.bFloorCallsOutside[2]%/s%"></div>
-                    <div id="landing_btn_4" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-text="4" data-tchmi-class-names='["call-btn"]' data-tchmi-width="45" data-tchmi-height="45" data-tchmi-left="190" data-tchmi-top="10" data-tchmi-state-symbol="%s%ADS.PLC1.GVL_HMI.bFloorCallsOutside[3]%/s%"></div>
-                    <div id="landing_btn_5" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-text="5" data-tchmi-class-names='["call-btn"]' data-tchmi-width="45" data-tchmi-height="45" data-tchmi-left="250" data-tchmi-top="10" data-tchmi-state-symbol="%s%ADS.PLC1.GVL_HMI.bFloorCallsOutside[4]%/s%"></div>
+                    <div id="landing_btn_1" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-text="1" data-tchmi-class-names='["call-btn"]' data-tchmi-width="45" data-tchmi-height="45" data-tchmi-left="10" data-tchmi-top="10"></div>
+                    <div id="landing_btn_2" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-text="2" data-tchmi-class-names='["call-btn"]' data-tchmi-width="45" data-tchmi-height="45" data-tchmi-left="70" data-tchmi-top="10"></div>
+                    <div id="landing_btn_3" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-text="3" data-tchmi-class-names='["call-btn"]' data-tchmi-width="45" data-tchmi-height="45" data-tchmi-left="130" data-tchmi-top="10"></div>
+                    <div id="landing_btn_4" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-text="4" data-tchmi-class-names='["call-btn"]' data-tchmi-width="45" data-tchmi-height="45" data-tchmi-left="190" data-tchmi-top="10"></div>
+                    <div id="landing_btn_5" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-text="5" data-tchmi-class-names='["call-btn"]' data-tchmi-width="45" data-tchmi-height="45" data-tchmi-left="250" data-tchmi-top="10"></div>
 
-                    <div id="landing_btn_6" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-text="6" data-tchmi-class-names='["call-btn"]' data-tchmi-width="45" data-tchmi-height="45" data-tchmi-left="10" data-tchmi-top="70" data-tchmi-state-symbol="%s%ADS.PLC1.GVL_HMI.bFloorCallsOutside[5]%/s%"></div>
-                    <div id="landing_btn_7" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-text="7" data-tchmi-class-names='["call-btn"]' data-tchmi-width="45" data-tchmi-height="45" data-tchmi-left="70" data-tchmi-top="70" data-tchmi-state-symbol="%s%ADS.PLC1.GVL_HMI.bFloorCallsOutside[6]%/s%"></div>
-                    <div id="landing_btn_8" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-text="8" data-tchmi-class-names='["call-btn"]' data-tchmi-width="45" data-tchmi-height="45" data-tchmi-left="130" data-tchmi-top="70" data-tchmi-state-symbol="%s%ADS.PLC1.GVL_HMI.bFloorCallsOutside[7]%/s%"></div>
-                    <div id="landing_btn_9" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-text="9" data-tchmi-class-names='["call-btn"]' data-tchmi-width="45" data-tchmi-height="45" data-tchmi-left="190" data-tchmi-top="70" data-tchmi-state-symbol="%s%ADS.PLC1.GVL_HMI.bFloorCallsOutside[8]%/s%"></div>
-                    <div id="landing_btn_10" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-text="10" data-tchmi-class-names='["call-btn"]' data-tchmi-width="45" data-tchmi-height="45" data-tchmi-left="250" data-tchmi-top="70" data-tchmi-state-symbol="%s%ADS.PLC1.GVL_HMI.bFloorCallsOutside[9]%/s%"></div>
+                    <div id="landing_btn_6" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-text="6" data-tchmi-class-names='["call-btn"]' data-tchmi-width="45" data-tchmi-height="45" data-tchmi-left="10" data-tchmi-top="70"></div>
+                    <div id="landing_btn_7" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-text="7" data-tchmi-class-names='["call-btn"]' data-tchmi-width="45" data-tchmi-height="45" data-tchmi-left="70" data-tchmi-top="70"></div>
+                    <div id="landing_btn_8" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-text="8" data-tchmi-class-names='["call-btn"]' data-tchmi-width="45" data-tchmi-height="45" data-tchmi-left="130" data-tchmi-top="70"></div>
+                    <div id="landing_btn_9" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-text="9" data-tchmi-class-names='["call-btn"]' data-tchmi-width="45" data-tchmi-height="45" data-tchmi-left="190" data-tchmi-top="70"></div>
+                    <div id="landing_btn_10" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-text="10" data-tchmi-class-names='["call-btn"]' data-tchmi-width="45" data-tchmi-height="45" data-tchmi-left="250" data-tchmi-top="70"></div>
                 </div>
 
                 <!-- Tab Header 2: Inside Car Calls -->
@@ -203,30 +228,36 @@
 
                 <!-- Cabin Keypad panel (1..10) -->
                 <div id="car_calls_grid" data-tchmi-type="TcHmi.Controls.System.TcHmiContainer" data-tchmi-height="180" data-tchmi-left="15" data-tchmi-top="270" data-tchmi-width="315" data-tchmi-class-names='["calls-button-grid"]'>
-                    <div id="keypad_btn_1" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-text="1" data-tchmi-class-names='["keypad-btn"]' data-tchmi-width="45" data-tchmi-height="45" data-tchmi-left="10" data-tchmi-top="10" data-tchmi-state-symbol="%s%PLC1.GVL_HMI.bCabinCallsInside[0]%/s%"></div>
-                    <div id="keypad_btn_2" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-text="2" data-tchmi-class-names='["keypad-btn"]' data-tchmi-width="45" data-tchmi-height="45" data-tchmi-left="70" data-tchmi-top="10" data-tchmi-state-symbol="%s%PLC1.GVL_HMI.bCabinCallsInside[1]%/s%"></div>
-                    <div id="keypad_btn_3" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-text="3" data-tchmi-class-names='["keypad-btn"]' data-tchmi-width="45" data-tchmi-height="45" data-tchmi-left="130" data-tchmi-top="10" data-tchmi-state-symbol="%s%PLC1.GVL_HMI.bCabinCallsInside[2]%/s%"></div>
-                    <div id="keypad_btn_4" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-text="4" data-tchmi-class-names='["keypad-btn"]' data-tchmi-width="45" data-tchmi-height="45" data-tchmi-left="190" data-tchmi-top="10" data-tchmi-state-symbol="%s%PLC1.GVL_HMI.bCabinCallsInside[3]%/s%"></div>
-                    <div id="keypad_btn_5" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-text="5" data-tchmi-class-names='["keypad-btn"]' data-tchmi-width="45" data-tchmi-height="45" data-tchmi-left="250" data-tchmi-top="10" data-tchmi-state-symbol="%s%PLC1.GVL_HMI.bCabinCallsInside[4]%/s%"></div>
+                    <div id="keypad_btn_1" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-text="1" data-tchmi-class-names='["keypad-btn"]' data-tchmi-width="45" data-tchmi-height="45" data-tchmi-left="10" data-tchmi-top="10"></div>
+                    <div id="keypad_btn_2" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-text="2" data-tchmi-class-names='["keypad-btn"]' data-tchmi-width="45" data-tchmi-height="45" data-tchmi-left="70" data-tchmi-top="10"></div>
+                    <div id="keypad_btn_3" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-text="3" data-tchmi-class-names='["keypad-btn"]' data-tchmi-width="45" data-tchmi-height="45" data-tchmi-left="130" data-tchmi-top="10"></div>
+                    <div id="keypad_btn_4" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-text="4" data-tchmi-class-names='["keypad-btn"]' data-tchmi-width="45" data-tchmi-height="45" data-tchmi-left="190" data-tchmi-top="10"></div>
+                    <div id="keypad_btn_5" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-text="5" data-tchmi-class-names='["keypad-btn"]' data-tchmi-width="45" data-tchmi-height="45" data-tchmi-left="250" data-tchmi-top="10"></div>
 
-                    <div id="keypad_btn_6" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-text="6" data-tchmi-class-names='["keypad-btn"]' data-tchmi-width="45" data-tchmi-height="45" data-tchmi-left="10" data-tchmi-top="70" data-tchmi-state-symbol="%s%PLC1.GVL_HMI.bCabinCallsInside[5]%/s%"></div>
-                    <div id="keypad_btn_7" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-text="7" data-tchmi-class-names='["keypad-btn"]' data-tchmi-width="45" data-tchmi-height="45" data-tchmi-left="70" data-tchmi-top="70" data-tchmi-state-symbol="%s%PLC1.GVL_HMI.bCabinCallsInside[6]%/s%"></div>
-                    <div id="keypad_btn_8" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-text="8" data-tchmi-class-names='["keypad-btn"]' data-tchmi-width="45" data-tchmi-height="45" data-tchmi-left="130" data-tchmi-top="70" data-tchmi-state-symbol="%s%PLC1.GVL_HMI.bCabinCallsInside[7]%/s%"></div>
-                    <div id="keypad_btn_9" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-text="9" data-tchmi-class-names='["keypad-btn"]' data-tchmi-width="45" data-tchmi-height="45" data-tchmi-left="190" data-tchmi-top="70" data-tchmi-state-symbol="%s%PLC1.GVL_HMI.bCabinCallsInside[8]%/s%"></div>
-                    <div id="keypad_btn_10" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-text="10" data-tchmi-class-names='["keypad-btn"]' data-tchmi-width="45" data-tchmi-height="45" data-tchmi-left="250" data-tchmi-top="70" data-tchmi-state-symbol="%s%PLC1.GVL_HMI.bCabinCallsInside[9]%/s%"></div>
+                    <div id="keypad_btn_6" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-text="6" data-tchmi-class-names='["keypad-btn"]' data-tchmi-width="45" data-tchmi-height="45" data-tchmi-left="10" data-tchmi-top="70"></div>
+                    <div id="keypad_btn_7" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-text="7" data-tchmi-class-names='["keypad-btn"]' data-tchmi-width="45" data-tchmi-height="45" data-tchmi-left="70" data-tchmi-top="70"></div>
+                    <div id="keypad_btn_8" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-text="8" data-tchmi-class-names='["keypad-btn"]' data-tchmi-width="45" data-tchmi-height="45" data-tchmi-left="130" data-tchmi-top="70"></div>
+                    <div id="keypad_btn_9" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-text="9" data-tchmi-class-names='["keypad-btn"]' data-tchmi-width="45" data-tchmi-height="45" data-tchmi-left="190" data-tchmi-top="70"></div>
+                    <div id="keypad_btn_10" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-text="10" data-tchmi-class-names='["keypad-btn"]' data-tchmi-width="45" data-tchmi-height="45" data-tchmi-left="250" data-tchmi-top="70"></div>
                 </div>
+<script data-tchmi-target-attribute="data-tchmi-class-names" type="application/json">
+["calls-button-grid"]
+</script>
+</div>
 
                 <!-- Light Curtain Obstruction Control Box -->
-                <div id="obstruction_box" data-tchmi-type="TcHmi.Controls.System.TcHmiContainer" data-tchmi-height="70" data-tchmi-left="15" data-tchmi-top="475" data-tchmi-width="315" data-tchmi-class-names='["obstruction-control"]'>
-                    <div id="lbl_obstruction" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-text="LIGHT CURTAIN OBSTRUCTION" data-tchmi-class-names='["obstruction-label"]' data-tchmi-width="190" data-tchmi-height="30" data-tchmi-left="10" data-tchmi-top="20"></div>
-
-                    <!-- Native Toggle Switch Control -->
-                    <div id="obstruction_toggle" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiToggleSwitch" data-tchmi-width="60" data-tchmi-height="26" data-tchmi-left="220" data-tchmi-top="22" data-tchmi-zindex="2" data-tchmi-toggle-state="%s%ADS.PLC1.GVL_HMI.bHmiObstruction%/s%"></div>
-                </div>
-            </div>
+            
+<script data-tchmi-target-attribute="data-tchmi-class-names" type="application/json">
+["dashboard-grid"]
+</script>
+</div>
 
         </div>
-    </div>
+    
+<script data-tchmi-target-attribute="data-tchmi-class-names" type="application/json">
+["hmi-body"]
+</script>
+</div>
 
     <!-- Custom bindings script -->
     <script src="custom.js"></script>

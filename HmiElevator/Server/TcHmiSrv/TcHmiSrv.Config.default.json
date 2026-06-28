@@ -3868,6 +3868,16 @@
             },
             "USEMAPPING": true
         },
+        "PLC1.MAIN.bResetCalls": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::MAIN::bResetCalls",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
         "RefreshDefinitions": {
             "ACCESS": 3,
             "DOMAIN": "TcHmiSrv",
@@ -4809,6 +4819,7 @@
                 "Logout": 3,
                 "PLC1.GVL_HMI.bCabinCallsInside": 3,
                 "PLC1.GVL_HMI.bHmiMovingUp": 3,
+                "PLC1.MAIN.bResetCalls": 3,
                 "SetLocale": 3,
                 "SubscribeEvents": 3,
                 "TcHmiSqliteLogger.Diagnostics": 1,
