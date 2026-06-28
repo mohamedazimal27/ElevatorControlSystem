@@ -10,7 +10,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{CB0C2111-F47C-4DE1-B004-9CDF5A557DF9}" Name="PlcElevator" PrjFilePath="PlcElevator\PlcElevator.plcproj" TmcFilePath="PlcElevator\PlcElevator.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="PlcElevator\PlcElevator.tmc" TmcHash="{38001716-9BA9-2FC9-AD38-BE76EB164A1D}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="PlcElevator\PlcElevator.tmc" TmcHash="{30244632-913E-A3CE-C8A4-38D492983A40}">
 					<Name>PlcElevator Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Contexts>
