@@ -13,7 +13,6 @@ An industrial-grade, object-oriented elevator control system simulation develope
 ### 🎥 Watch the Demonstration on YouTube
 [![Watch the video](https://img.shields.io/badge/YouTube-Watch%20Showcase-red?style=for-the-badge&logo=youtube)](https://www.youtube.com/watch?v=a8VGd4jyrSQ)
 
-*(Click the badge above to watch the demonstration video on YouTube — make sure to replace `YOUR_VIDEO_ID` with your actual YouTube URL)*
 
 ---
 
