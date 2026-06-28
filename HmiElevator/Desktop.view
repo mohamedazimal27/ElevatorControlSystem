@@ -136,42 +136,9 @@
 /* Elevator Cabin */
 .elevator-cabin {
     position: absolute !important;
-    background: linear-gradient(135deg, #384259, #202737) !important;
-    border: 2px solid rgba(255, 255, 255, 0.25) !important;
-    border-radius: 6px !important;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.7), 0 0 10px rgba(255, 179, 0, 0.3) !important;
-    display: flex !important;
-    justify-content: space-between !important;
-    align-items: center !important;
-    padding: 0 !important;
     box-sizing: border-box !important;
-    overflow: hidden !important;
     transition: top 0.15s linear !important;
 }
-
-/* Cabin Doors */
-.cabin-door {
-    width: 50% !important;
-    height: 100% !important;
-    background: linear-gradient(90deg, #64748b, #475569) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    box-sizing: border-box !important;
-    transition: width 0.8s ease-in-out !important;
-}
-
-.cabin-door.left {
-    border-right: 1.5px solid rgba(0, 0, 0, 0.5) !important;
-}
-
-.cabin-door.right {
-    border-left: 1.5px solid rgba(0, 0, 0, 0.5) !important;
-}
-
-/* Door width states */
-.door-state-closed .cabin-door { width: 50% !important; }
-.door-state-opening .cabin-door { width: 0% !important; }
-.door-state-open .cabin-door { width: 0% !important; }
-.door-state-closing .cabin-door { width: 50% !important; }
 
 /* 2. Telemetry Panel Display */
 .telemetry-display-container {
@@ -394,7 +361,7 @@
             "objectType": "JavaScript",
             "active": true,
             "sourceLines": [
-              "var val = (typeof symbol !== 'undefined' && symbol) ? symbol.getValue() : null; if (val === null) { TcHmi.Symbol.readEx2('%s%ADS.PLC1.GVL_HMI.eHmiDoorState%/s%', function(data) { if (data.error === TcHmi.Errors.NONE) { updateDoor(data.value); } }); } else { updateDoor(val); } function updateDoor(state) { var doorStateStrings = ['CLOSED', 'OPENING', 'OPEN', 'CLOSING']; var telemetryDoorCtrl = TcHmi.Controls.get('telemetry_door'); if (telemetryDoorCtrl) { telemetryDoorCtrl.setText(doorStateStrings[state] || 'UNKNOWN'); } var cabinCtrl = TcHmi.Controls.get('hmi_cabin'); if (cabinCtrl) { var classList = ['elevator-cabin']; if (state === 0) classList.push('door-state-closed'); else if (state === 1) classList.push('door-state-opening'); else if (state === 2) classList.push('door-state-open'); else if (state === 3) classList.push('door-state-closing'); cabinCtrl.setClassNames(classList); } }"
+              "var val = (typeof symbol !== 'undefined' && symbol) ? symbol.getValue() : null; if (val === null) { TcHmi.Symbol.readEx2('%s%ADS.PLC1.GVL_HMI.eHmiDoorState%/s%', function(data) { if (data.error === TcHmi.Errors.NONE) { updateDoor(data.value); } }); } else { updateDoor(val); } function updateDoor(state) { var cabinCtrl = TcHmi.Controls.get('hmi_cabin'); if (cabinCtrl) { var src = 'Images/close.png'; if (state === 1 || state === 3) { src = 'Images/partialopen.png'; } else if (state === 2) { src = 'Images/fullyopen.png'; } if (typeof cabinCtrl.setSrc === 'function') { cabinCtrl.setSrc(src); } else { cabinCtrl.setAttribute('Src', src); } } }"
             ]
           }
         ]
@@ -508,7 +475,7 @@
         </div>
 
         <!-- TOP STATUS SUMMARY BAR -->
-        <div id="status_summary_bar" data-tchmi-type="TcHmi.Controls.System.TcHmiContainer" data-tchmi-height="50" data-tchmi-height-unit="px" data-tchmi-left="20" data-tchmi-left-unit="px" data-tchmi-top="80" data-tchmi-top-unit="px" data-tchmi-width="1240" data-tchmi-width-unit="px" data-tchmi-zindex="2" data-tchmi-class-names='["status-bar"]'>
+        <div id="status_summary_bar" data-tchmi-type="TcHmi.Controls.System.TcHmiContainer" data-tchmi-height="50" data-tchmi-height-unit="px" data-tchmi-left="20" data-tchmi-left-unit="px" data-tchmi-top="80" data-tchmi-top-unit="px" data-tchmi-width="1240" data-tchmi-width-unit="px" data-tchmi-zindex="2" >
             <!-- System Status -->
             <div id="lbl_sys_status" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-text="System Status:" data-tchmi-left="20" data-tchmi-top="15" data-tchmi-width="100" data-tchmi-height="20" data-tchmi-text-font-weight="Bold"></div>
             <div id="val_sys_status" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-text="NORMAL OPERATION" data-tchmi-left="120" data-tchmi-top="15" data-tchmi-width="150" data-tchmi-height="20" data-tchmi-text-font-weight="Bold"></div>
@@ -516,13 +483,39 @@
             <!-- Active Elevator -->
             <div id="lbl_active_elevator" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-text="Active Cabin:" data-tchmi-left="1020" data-tchmi-top="15" data-tchmi-width="100" data-tchmi-height="20" data-tchmi-text-font-weight="Bold"></div>
             <div id="val_active_elevator" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-text="ELEVATOR 1" data-tchmi-left="1120" data-tchmi-top="15" data-tchmi-width="100" data-tchmi-height="20" data-tchmi-text-font-weight="Bold" data-tchmi-text-horizontal-alignment="Center" data-tchmi-class-names='["active-cabin-badge"]'></div>
-        </div>
+        
+<script data-tchmi-target-attribute="data-tchmi-class-names" type="application/json">
+["status-bar"]
+</script>
+
+<script data-tchmi-target-attribute="data-tchmi-border-width" type="application/json">
+{
+  "left": 1,
+  "right": 1,
+  "top": 1,
+  "bottom": 1,
+  "leftUnit": "px",
+  "rightUnit": "px",
+  "topUnit": "px",
+  "bottomUnit": "px"
+}
+</script>
+
+<script data-tchmi-target-attribute="data-tchmi-border-style" type="application/json">
+{
+  "left": "Solid",
+  "right": "Solid",
+  "top": "Solid",
+  "bottom": "Solid"
+}
+</script>
+</div>
 
         <!-- MAIN 3-COLUMN WRAPPER -->
         <div id="main_dashboard_grid" data-tchmi-type="TcHmi.Controls.System.TcHmiContainer" data-tchmi-height="630" data-tchmi-height-unit="px" data-tchmi-left="20" data-tchmi-left-unit="px" data-tchmi-top="140" data-tchmi-top-unit="px" data-tchmi-width="1240" data-tchmi-width-unit="px" data-tchmi-zindex="2" >
 
             <!-- COLUMN 1: Visual Shaft Panel -->
-            <div id="shaft_panel" data-tchmi-type="TcHmi.Controls.System.TcHmiContainer" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-left="0" data-tchmi-left-unit="px" data-tchmi-top="0" data-tchmi-top-unit="px" data-tchmi-width="320" data-tchmi-width-unit="px" data-tchmi-zindex="2" data-tchmi-class-names='["panel-card"]'>
+            <div id="shaft_panel" data-tchmi-type="TcHmi.Controls.System.TcHmiContainer" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-left="0" data-tchmi-left-unit="px" data-tchmi-top="0" data-tchmi-top-unit="px" data-tchmi-width="320" data-tchmi-width-unit="px" data-tchmi-zindex="2" >
                 <div id="shaft_title" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="30" data-tchmi-height-unit="px" data-tchmi-left="20" data-tchmi-left-unit="px" data-tchmi-top="15" data-tchmi-top-unit="px" data-tchmi-width="280" data-tchmi-width-unit="px" data-tchmi-text="Elevator Shaft" data-tchmi-class-names='["panel-title"]' data-tchmi-zindex="2"></div>
 
                 <!-- Combined Shaft Container -->
@@ -530,45 +523,66 @@
 
                     <!-- LEFT SIDE: Floor block indicators (10 down to 1) -->
                     <div id="floor_blocks_container" data-tchmi-type="TcHmi.Controls.System.TcHmiContainer" data-tchmi-left="10" data-tchmi-top="10" data-tchmi-width="110" data-tchmi-height="490">
-                        <div id="shaft_floor_10" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-left="0" data-tchmi-top="0" data-tchmi-width="100" data-tchmi-height="42" data-tchmi-text="Floor 10" data-tchmi-class-names='["shaft-floor-block"]'></div>
-                        <div id="shaft_floor_9" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-left="0" data-tchmi-top="47" data-tchmi-width="100" data-tchmi-height="42" data-tchmi-text="Floor 9" data-tchmi-class-names='["shaft-floor-block"]'></div>
-                        <div id="shaft_floor_8" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-left="0" data-tchmi-top="94" data-tchmi-width="100" data-tchmi-height="42" data-tchmi-text="Floor 8" data-tchmi-class-names='["shaft-floor-block"]'></div>
-                        <div id="shaft_floor_7" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-left="0" data-tchmi-top="141" data-tchmi-width="100" data-tchmi-height="42" data-tchmi-text="Floor 7" data-tchmi-class-names='["shaft-floor-block"]'></div>
-                        <div id="shaft_floor_6" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-left="0" data-tchmi-top="188" data-tchmi-width="100" data-tchmi-height="42" data-tchmi-text="Floor 6" data-tchmi-class-names='["shaft-floor-block"]'></div>
-                        <div id="shaft_floor_5" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-left="0" data-tchmi-top="235" data-tchmi-width="100" data-tchmi-height="42" data-tchmi-text="Floor 5" data-tchmi-class-names='["shaft-floor-block"]'></div>
-                        <div id="shaft_floor_4" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-left="0" data-tchmi-top="282" data-tchmi-width="100" data-tchmi-height="42" data-tchmi-text="Floor 4" data-tchmi-class-names='["shaft-floor-block"]'></div>
-                        <div id="shaft_floor_3" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-left="0" data-tchmi-top="329" data-tchmi-width="100" data-tchmi-height="42" data-tchmi-text="Floor 3" data-tchmi-class-names='["shaft-floor-block"]'></div>
-                        <div id="shaft_floor_2" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-left="0" data-tchmi-top="376" data-tchmi-width="100" data-tchmi-height="42" data-tchmi-text="Floor 2" data-tchmi-class-names='["shaft-floor-block"]'></div>
-                        <div id="shaft_floor_1" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-left="0" data-tchmi-top="423" data-tchmi-width="100" data-tchmi-height="42" data-tchmi-text="Floor 1" data-tchmi-class-names='["shaft-floor-block"]'></div>
+                        <div id="shaft_floor_10" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-left="0" data-tchmi-top="0" data-tchmi-width="100" data-tchmi-height="42" data-tchmi-text="Floor 10"  data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-vertical-alignment="Center" data-tchmi-text-font-size-unit="%" data-tchmi-text-font-size="150">
+<script data-tchmi-target-attribute="data-tchmi-class-names" type="application/json">
+["shaft-floor-block"]
+</script>
+</div>
+                        <div id="shaft_floor_9" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-left="0" data-tchmi-top="47" data-tchmi-width="100" data-tchmi-height="42" data-tchmi-text="Floor 9"  data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-vertical-alignment="Center" data-tchmi-text-font-size-unit="%" data-tchmi-text-font-size="150">
+<script data-tchmi-target-attribute="data-tchmi-class-names" type="application/json">
+["shaft-floor-block"]
+</script>
+</div>
+                        <div id="shaft_floor_8" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-left="0" data-tchmi-top="94" data-tchmi-width="100" data-tchmi-height="42" data-tchmi-text="Floor 8"  data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-vertical-alignment="Center" data-tchmi-text-font-size-unit="%" data-tchmi-text-font-size="150">
+<script data-tchmi-target-attribute="data-tchmi-class-names" type="application/json">
+["shaft-floor-block"]
+</script>
+</div>
+                        <div id="shaft_floor_7" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-left="0" data-tchmi-top="141" data-tchmi-width="100" data-tchmi-height="42" data-tchmi-text="Floor 7"  data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-vertical-alignment="Center" data-tchmi-text-font-size-unit="%" data-tchmi-text-font-size="150">
+<script data-tchmi-target-attribute="data-tchmi-class-names" type="application/json">
+["shaft-floor-block"]
+</script>
+</div>
+                        <div id="shaft_floor_6" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-left="0" data-tchmi-top="188" data-tchmi-width="100" data-tchmi-height="42" data-tchmi-text="Floor 6"  data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-vertical-alignment="Center" data-tchmi-text-font-size-unit="%" data-tchmi-text-font-size="150">
+<script data-tchmi-target-attribute="data-tchmi-class-names" type="application/json">
+["shaft-floor-block"]
+</script>
+</div>
+                        <div id="shaft_floor_5" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-left="0" data-tchmi-top="235" data-tchmi-width="100" data-tchmi-height="42" data-tchmi-text="Floor 5"  data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-vertical-alignment="Center" data-tchmi-text-font-size-unit="%" data-tchmi-text-font-size="150">
+<script data-tchmi-target-attribute="data-tchmi-class-names" type="application/json">
+["shaft-floor-block"]
+</script>
+</div>
+                        <div id="shaft_floor_4" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-left="0" data-tchmi-top="282" data-tchmi-width="100" data-tchmi-height="42" data-tchmi-text="Floor 4"  data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-vertical-alignment="Center" data-tchmi-text-font-size-unit="%" data-tchmi-text-font-size="150">
+<script data-tchmi-target-attribute="data-tchmi-class-names" type="application/json">
+["shaft-floor-block"]
+</script>
+</div>
+                        <div id="shaft_floor_3" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-left="0" data-tchmi-top="329" data-tchmi-width="100" data-tchmi-height="42" data-tchmi-text="Floor 3"  data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-vertical-alignment="Center" data-tchmi-text-font-size-unit="%" data-tchmi-text-font-size="150">
+<script data-tchmi-target-attribute="data-tchmi-class-names" type="application/json">
+["shaft-floor-block"]
+</script>
+</div>
+                        <div id="shaft_floor_2" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-left="0" data-tchmi-top="376" data-tchmi-width="100" data-tchmi-height="42" data-tchmi-text="Floor 2"  data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-vertical-alignment="Center" data-tchmi-text-font-size-unit="%" data-tchmi-text-font-size="150">
+<script data-tchmi-target-attribute="data-tchmi-class-names" type="application/json">
+["shaft-floor-block"]
+</script>
+</div>
+                        <div id="shaft_floor_1" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-left="0" data-tchmi-top="423" data-tchmi-width="100" data-tchmi-height="42" data-tchmi-text="Floor 1"  data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-vertical-alignment="Center" data-tchmi-text-font-size-unit="%" data-tchmi-text-font-size="150">
+<script data-tchmi-target-attribute="data-tchmi-class-names" type="application/json">
+["shaft-floor-block"]
+</script>
+</div>
                     </div>
 
                     <!-- RIGHT SIDE: Guide rails and sliding cabin -->
                     <div id="cabin_rail_container" data-tchmi-type="TcHmi.Controls.System.TcHmiContainer" data-tchmi-left="130" data-tchmi-top="10" data-tchmi-width="120" data-tchmi-height="490" data-tchmi-class-names='["rail-track"]'>
                         <!-- Smooth moving cabin -->
-                        <div id="hmi_cabin" data-tchmi-type="TcHmi.Controls.System.TcHmiContainer" data-tchmi-height="42" data-tchmi-height-unit="px" data-tchmi-left="10" data-tchmi-left-unit="px" data-tchmi-top="423" data-tchmi-top-unit="px" data-tchmi-width="100" data-tchmi-width-unit="px" data-tchmi-zindex="3" data-tchmi-class-names='["elevator-cabin", "door-state-closed"]'>
-                            <div id="door_left" data-tchmi-type="TcHmi.Controls.System.TcHmiContainer" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-left="0" data-tchmi-left-unit="px" data-tchmi-top="0" data-tchmi-top-unit="px" data-tchmi-width="50" data-tchmi-width-unit="%" data-tchmi-zindex="1" >
+                        <div id="hmi_cabin" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiImage" data-tchmi-height="49" data-tchmi-height-unit="px" data-tchmi-left="20" data-tchmi-left-unit="px" data-tchmi-top="423" data-tchmi-top-unit="px" data-tchmi-width="64" data-tchmi-width-unit="px" data-tchmi-zindex="3" data-tchmi-src="Images/close.png"  data-tchmi-class-names="[&quot;elevator-cabin&quot;]">
 <script data-tchmi-target-attribute="data-tchmi-class-names" type="application/json">
-["cabin-door", "left"]
-</script>
-
-<script data-tchmi-target-attribute="data-tchmi-background-color" type="application/json">
-{
-  "color": "rgba(0, 0, 0, 1)"
-}
+["elevator-cabin", "door-state-closed"]
 </script>
 </div>
-                            <div id="door_right" data-tchmi-type="TcHmi.Controls.System.TcHmiContainer" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-left="50" data-tchmi-left-unit="%" data-tchmi-top="0" data-tchmi-top-unit="px" data-tchmi-width="50" data-tchmi-width-unit="%" data-tchmi-zindex="1" >
-<script data-tchmi-target-attribute="data-tchmi-class-names" type="application/json">
-["cabin-door", "right"]
-</script>
-
-<script data-tchmi-target-attribute="data-tchmi-background-color" type="application/json">
-{
-  "color": "rgba(0, 0, 0, 1)"
-}
-</script>
-</div>
-                        </div>
                     </div>
 
                 
@@ -576,22 +590,203 @@
 ["shaft-container"]
 </script>
 </div>
-            </div>
+            
+<script data-tchmi-target-attribute="data-tchmi-class-names" type="application/json">
+["panel-card"]
+</script>
+<script data-tchmi-target-attribute="data-tchmi-border-style" type="application/json">
+{
+  "left": "Solid",
+  "right": "Solid",
+  "top": "Solid",
+  "bottom": "Solid"
+}
+</script>
+<script data-tchmi-target-attribute="data-tchmi-border-width" type="application/json">
+{
+  "left": 1,
+  "right": 1,
+  "top": 1,
+  "bottom": 1,
+  "leftUnit": "px",
+  "rightUnit": "px",
+  "topUnit": "px",
+  "bottomUnit": "px"
+}
+</script>
+</div>
 
             <!-- COLUMN 2: Telemetry & Detail Status Panel -->
             <div id="telemetry_panel_card" data-tchmi-type="TcHmi.Controls.System.TcHmiContainer" data-tchmi-height="100" data-tchmi-height-unit="%" data-tchmi-left="340" data-tchmi-left-unit="px" data-tchmi-top="0" data-tchmi-top-unit="px" data-tchmi-width="540" data-tchmi-width-unit="px" data-tchmi-zindex="2" >
-                <div id="tele_title" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="30" data-tchmi-height-unit="px" data-tchmi-left="20" data-tchmi-left-unit="px" data-tchmi-top="15" data-tchmi-top-unit="px" data-tchmi-width="500" data-tchmi-width-unit="px" data-tchmi-text="ELEVATOR 1 STATUS &amp; METRICS" data-tchmi-class-names='["panel-title"]' data-tchmi-zindex="2"></div>
+                <div id="tele_title" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="30" data-tchmi-height-unit="px" data-tchmi-left="20" data-tchmi-left-unit="px" data-tchmi-top="15" data-tchmi-top-unit="px" data-tchmi-width="500" data-tchmi-width-unit="px" data-tchmi-text="ELEVATOR 1 STATUS &amp; METRICS" data-tchmi-zindex="2">
+<script data-tchmi-target-attribute="data-tchmi-class-names" type="application/json">
+["panel-title"]
+</script>
+
+<script data-tchmi-target-attribute="data-tchmi-border-style" type="application/json">
+{
+  "left": "Solid",
+  "right": "Solid",
+  "top": "Solid",
+  "bottom": "Solid"
+}
+</script>
+
+<script data-tchmi-target-attribute="data-tchmi-border-width" type="application/json">
+{
+  "left": 1,
+  "right": 1,
+  "top": 1,
+  "bottom": 1,
+  "leftUnit": "px",
+  "rightUnit": "px",
+  "topUnit": "px",
+  "bottomUnit": "px"
+}
+</script>
+</div>
 
                 <!-- Large Telemetry Block -->
                 <div id="telemetry_dashboard" data-tchmi-type="TcHmi.Controls.System.TcHmiContainer" data-tchmi-height="130" data-tchmi-left="20" data-tchmi-top="60" data-tchmi-width="500" >
                     <!-- Direction -->
                     <div id="box_direction" data-tchmi-type="TcHmi.Controls.System.TcHmiContainer" data-tchmi-left="20" data-tchmi-top="15" data-tchmi-width="120" data-tchmi-height="100" >
-                        <div id="lbl_dir" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-left="0" data-tchmi-top="10" data-tchmi-width="120" data-tchmi-height="20" data-tchmi-text="Direction" data-tchmi-class-names='["box-label"]'></div>
-                        <div id="val_dir" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-left="0" data-tchmi-top="40" data-tchmi-width="120" data-tchmi-height="50" >
-                            <script data-tchmi-target-attribute="data-tchmi-class-names" type="application/json">
-                                ["box-value-large"]
-                            </script>
-                        </div>
+<script data-tchmi-target-attribute="data-tchmi-border-style" type="application/json">
+{
+  "left": "Solid",
+  "right": "Solid",
+  "top": "Solid",
+  "bottom": "Solid"
+}
+</script>
+<script data-tchmi-target-attribute="data-tchmi-border-width" type="application/json">
+{
+  "left": 1,
+  "right": 1,
+  "top": 1,
+  "bottom": 1,
+  "leftUnit": "px",
+  "rightUnit": "px",
+  "topUnit": "px",
+  "bottomUnit": "px"
+}
+</script>
+                        <div id="lbl_dir" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-left="0" data-tchmi-top="10" data-tchmi-width="120" data-tchmi-height="20" data-tchmi-text="Direction" >
+<script data-tchmi-target-attribute="data-tchmi-class-names" type="application/json">
+["box-label"]
+</script>
+</div>
+                        <div id="val_dir" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-left="0" data-tchmi-top="40" data-tchmi-width="120" data-tchmi-height="50" data-tchmi-text-vertical-alignment="Center" data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-font-weight="Bold" data-tchmi-text-font-size-unit="%" data-tchmi-text-font-size="150">
+                            
+                        
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
+[
+  {
+    "event": "%s%ADS.PLC1.GVL_HMI.bHmiMovingDown%/s%",
+    "actions": [
+      {
+        "objectType": "Condition",
+        "active": true,
+        "parts": [
+          {
+            "if": [
+              {
+                "compare1": {
+                  "objectType": "Symbol",
+                  "valueType": "tchmi:general#/definitions/BOOL",
+                  "symbolExpression": "%s%ADS.PLC1.GVL_HMI.bHmiMovingDown%/s%"
+                },
+                "compare2": {
+                  "objectType": "StaticValue",
+                  "valueType": "tchmi:general#/definitions/BOOL",
+                  "value": true
+                },
+                "compareOperator": "==",
+                "logic": null
+              }
+            ],
+            "then": [
+              {
+                "objectType": "WriteToSymbol",
+                "active": true,
+                "symbolExpression": "%ctrl%val_dir::Text%/ctrl%",
+                "value": {
+                  "objectType": "StaticValue",
+                  "valueType": "tchmi:general#/definitions/String",
+                  "value": "DOWN"
+                },
+                "asyncWait": true
+              }
+            ]
+          },
+          {
+            "else": [
+              {
+                "objectType": "WriteToSymbol",
+                "active": true,
+                "symbolExpression": "%ctrl%val_dir::Text%/ctrl%",
+                "value": {
+                  "objectType": "StaticValue",
+                  "valueType": "tchmi:general#/definitions/String",
+                  "value": ""
+                },
+                "asyncWait": true
+              }
+            ]
+          }
+        ],
+        "asyncWait": true
+      }
+    ]
+  },
+  {
+    "event": "%s%PLC1.GVL_HMI.bHmiMovingUp%/s%",
+    "actions": [
+      {
+        "objectType": "Condition",
+        "active": true,
+        "parts": [
+          {
+            "if": [
+              {
+                "compare1": {
+                  "objectType": "Symbol",
+                  "valueType": "tchmi:general#/definitions/BOOL",
+                  "symbolExpression": "%s%PLC1.GVL_HMI.bHmiMovingUp%/s%"
+                },
+                "compare2": {
+                  "objectType": "StaticValue",
+                  "valueType": "tchmi:general#/definitions/BOOL",
+                  "value": true
+                },
+                "compareOperator": "==",
+                "logic": null
+              }
+            ],
+            "then": [
+              {
+                "objectType": "WriteToSymbol",
+                "active": true,
+                "symbolExpression": "%ctrl%val_dir::Text%/ctrl%",
+                "value": {
+                  "objectType": "StaticValue",
+                  "valueType": "tchmi:general#/definitions/String",
+                  "value": "UP"
+                },
+                "asyncWait": true
+              }
+            ]
+          },
+          {
+            "else": []
+          }
+        ],
+        "asyncWait": true
+      }
+    ]
+  }
+]
+</script>
+</div>
                     
 <script data-tchmi-target-attribute="data-tchmi-class-names" type="application/json">
 ["dashboard-box"]
@@ -599,8 +794,28 @@
 </div>
                     <!-- Current Floor -->
                     <div id="box_current_floor" data-tchmi-type="TcHmi.Controls.System.TcHmiContainer" data-tchmi-left="180" data-tchmi-top="15" data-tchmi-width="130" data-tchmi-height="100" data-tchmi-class-names='["dashboard-box"]'>
+<script data-tchmi-target-attribute="data-tchmi-border-style" type="application/json">
+{
+  "left": "Solid",
+  "right": "Solid",
+  "top": "Solid",
+  "bottom": "Solid"
+}
+</script>
+<script data-tchmi-target-attribute="data-tchmi-border-width" type="application/json">
+{
+  "left": 1,
+  "right": 1,
+  "top": 1,
+  "bottom": 1,
+  "leftUnit": "px",
+  "rightUnit": "px",
+  "topUnit": "px",
+  "bottomUnit": "px"
+}
+</script>
                         <div id="lbl_curr_flr" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-left="0" data-tchmi-top="10" data-tchmi-width="130" data-tchmi-height="20" data-tchmi-text="Current Floor" data-tchmi-class-names='["box-label"]'></div>
-                        <div id="val_current_floor" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-left="0" data-tchmi-top="35" data-tchmi-width="130" data-tchmi-height="60" data-tchmi-text="%s%ADS.PLC1.GVL_HMI.nHmiCurrentFloor%/s%">
+                        <div id="val_current_floor" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-left="0" data-tchmi-top="35" data-tchmi-width="130" data-tchmi-height="60" data-tchmi-text="%s%ADS.PLC1.GVL_HMI.nHmiCurrentFloor%/s%" data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-vertical-alignment="Center" data-tchmi-text-font-size-unit="%" data-tchmi-text-font-size="150" data-tchmi-text-font-weight="Bold">
                             <script data-tchmi-target-attribute="data-tchmi-class-names" type="application/json">
                                 ["box-value-huge"]
                             </script>
@@ -608,8 +823,28 @@
                     </div>
                     <!-- Target Floor -->
                     <div id="box_target_floor" data-tchmi-type="TcHmi.Controls.System.TcHmiContainer" data-tchmi-left="350" data-tchmi-top="15" data-tchmi-width="130" data-tchmi-height="100" >
+<script data-tchmi-target-attribute="data-tchmi-border-style" type="application/json">
+{
+  "left": "Solid",
+  "right": "Solid",
+  "top": "Solid",
+  "bottom": "Solid"
+}
+</script>
+<script data-tchmi-target-attribute="data-tchmi-border-width" type="application/json">
+{
+  "left": 1,
+  "right": 1,
+  "top": 1,
+  "bottom": 1,
+  "leftUnit": "px",
+  "rightUnit": "px",
+  "topUnit": "px",
+  "bottomUnit": "px"
+}
+</script>
                         <div id="lbl_target_flr" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-left="0" data-tchmi-top="10" data-tchmi-width="130" data-tchmi-height="20" data-tchmi-text="Target Floor" data-tchmi-class-names='["box-label"]'></div>
-                        <div id="val_target_floor" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-left="0" data-tchmi-top="35" data-tchmi-width="130" data-tchmi-height="60" data-tchmi-text="%s%ADS.PLC1.GVL_HMI.nHmiTargetFloor%/s%">
+                        <div id="val_target_floor" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-left="0" data-tchmi-top="35" data-tchmi-width="130" data-tchmi-height="60" data-tchmi-text="%s%ADS.PLC1.GVL_HMI.nHmiTargetFloor%/s%" data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-vertical-alignment="Center" data-tchmi-text-font-size-unit="%" data-tchmi-text-font-size="150" data-tchmi-text-font-weight="Bold">
                             <script data-tchmi-target-attribute="data-tchmi-class-names" type="application/json">
                                 ["box-value-huge", "target-highlight"]
                             </script>
@@ -744,6 +979,26 @@
 </script>
 </div>
                     </div>
+<script data-tchmi-target-attribute="data-tchmi-border-style" type="application/json">
+{
+  "left": "Solid",
+  "right": "Solid",
+  "top": "Solid",
+  "bottom": "Solid"
+}
+</script>
+<script data-tchmi-target-attribute="data-tchmi-border-width" type="application/json">
+{
+  "left": 1,
+  "right": 1,
+  "top": 1,
+  "bottom": 1,
+  "leftUnit": "px",
+  "rightUnit": "px",
+  "topUnit": "px",
+  "bottomUnit": "px"
+}
+</script>
                 </div>
 
                 <!-- System Controls Card -->
@@ -766,6 +1021,26 @@
 ["harness-label"]
 </script>
 </div>
+<script data-tchmi-target-attribute="data-tchmi-border-style" type="application/json">
+{
+  "left": "Solid",
+  "right": "Solid",
+  "top": "Solid",
+  "bottom": "Solid"
+}
+</script>
+<script data-tchmi-target-attribute="data-tchmi-border-width" type="application/json">
+{
+  "left": 1,
+  "right": 1,
+  "top": 1,
+  "bottom": 1,
+  "leftUnit": "px",
+  "rightUnit": "px",
+  "topUnit": "px",
+  "bottomUnit": "px"
+}
+</script>
                 </div>
             
 <script data-tchmi-target-attribute="data-tchmi-class-names" type="application/json">
@@ -782,7 +1057,49 @@
 <script data-tchmi-target-attribute="data-tchmi-class-names" type="application/json">
 ["obstruction-control"]
 </script>
+<script data-tchmi-target-attribute="data-tchmi-border-style" type="application/json">
+{
+  "left": "Solid",
+  "right": "Solid",
+  "top": "Solid",
+  "bottom": "Solid"
+}
+</script>
+<script data-tchmi-target-attribute="data-tchmi-border-width" type="application/json">
+{
+  "left": 1,
+  "right": 1,
+  "top": 1,
+  "bottom": 1,
+  "leftUnit": "px",
+  "rightUnit": "px",
+  "topUnit": "px",
+  "bottomUnit": "px"
+}
+</script>
 </div>
+
+<script data-tchmi-target-attribute="data-tchmi-border-style" type="application/json">
+{
+  "left": "Solid",
+  "right": "Solid",
+  "top": "Solid",
+  "bottom": "Solid"
+}
+</script>
+
+<script data-tchmi-target-attribute="data-tchmi-border-width" type="application/json">
+{
+  "left": 1,
+  "right": 1,
+  "top": 1,
+  "bottom": 1,
+  "leftUnit": "px",
+  "rightUnit": "px",
+  "topUnit": "px",
+  "bottomUnit": "px"
+}
+</script>
 </div>
 
             <!-- COLUMN 3: Calls & Interaction Grid -->
@@ -823,6 +1140,28 @@
                 
 <script data-tchmi-target-attribute="data-tchmi-class-names" type="application/json">
 ["calls-button-grid"]
+</script>
+
+<script data-tchmi-target-attribute="data-tchmi-border-width" type="application/json">
+{
+  "left": 1,
+  "right": 1,
+  "top": 1,
+  "bottom": 1,
+  "leftUnit": "px",
+  "rightUnit": "px",
+  "topUnit": "px",
+  "bottomUnit": "px"
+}
+</script>
+
+<script data-tchmi-target-attribute="data-tchmi-border-style" type="application/json">
+{
+  "left": "Solid",
+  "right": "Solid",
+  "top": "Solid",
+  "bottom": "Solid"
+}
 </script>
 </div>
 
@@ -869,6 +1208,34 @@
                 
 <script data-tchmi-target-attribute="data-tchmi-class-names" type="application/json">
 ["calls-button-grid"]
+</script>
+
+<script data-tchmi-target-attribute="data-tchmi-border-color" type="application/json">
+{
+  "color": "rgba(0, 0, 0, 1)"
+}
+</script>
+
+<script data-tchmi-target-attribute="data-tchmi-border-width" type="application/json">
+{
+  "left": 1,
+  "right": 1,
+  "top": 1,
+  "bottom": 1,
+  "leftUnit": "px",
+  "rightUnit": "px",
+  "topUnit": "px",
+  "bottomUnit": "px"
+}
+</script>
+
+<script data-tchmi-target-attribute="data-tchmi-border-style" type="application/json">
+{
+  "left": "Solid",
+  "right": "Solid",
+  "top": "Solid",
+  "bottom": "Solid"
+}
 </script>
 </div>
 <script data-tchmi-target-attribute="data-tchmi-class-names" type="application/json">
