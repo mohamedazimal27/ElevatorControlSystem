@@ -127,6 +127,9 @@
     <Content Include=".eslintrc.json">
       <Visible>false</Visible>
     </Content>
+    <Content Include="Images\shaft.png">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Images\close.png">
       <SubType>Content</SubType>
     </Content>

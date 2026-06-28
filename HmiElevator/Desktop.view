@@ -578,12 +578,14 @@
                     <!-- RIGHT SIDE: Guide rails and sliding cabin -->
                     <div id="cabin_rail_container" data-tchmi-type="TcHmi.Controls.System.TcHmiContainer" data-tchmi-left="130" data-tchmi-top="10" data-tchmi-width="120" data-tchmi-height="490" data-tchmi-class-names='["rail-track"]'>
                         <!-- Smooth moving cabin -->
-                        <div id="hmi_cabin" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiImage" data-tchmi-height="49" data-tchmi-height-unit="px" data-tchmi-left="20" data-tchmi-left-unit="px" data-tchmi-top="423" data-tchmi-top-unit="px" data-tchmi-width="64" data-tchmi-width-unit="px" data-tchmi-zindex="3" data-tchmi-src="Images/close.png"  data-tchmi-class-names="[&quot;elevator-cabin&quot;]">
+                        <div id="hmi_cabin" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiImage" data-tchmi-height="49" data-tchmi-height-unit="px" data-tchmi-left="20" data-tchmi-left-unit="px" data-tchmi-top="423" data-tchmi-top-unit="px" data-tchmi-width="64" data-tchmi-width-unit="px" data-tchmi-zindex="6" data-tchmi-src="Images/close.png"  data-tchmi-class-names="[&quot;elevator-cabin&quot;]">
 <script data-tchmi-target-attribute="data-tchmi-class-names" type="application/json">
 ["elevator-cabin", "door-state-closed"]
 </script>
 </div>
-                    </div>
+                    <div id="TcHmi_Controls_Beckhoff_TcHmiImage" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiImage" data-tchmi-height="475" data-tchmi-height-unit="px" data-tchmi-left="-10" data-tchmi-left-unit="px" data-tchmi-src="Images/shaft.png" data-tchmi-top="0" data-tchmi-top-unit="px" data-tchmi-width="120" data-tchmi-width-unit="px" data-tchmi-zindex="5">
+</div>
+</div>
 
                 
 <script data-tchmi-target-attribute="data-tchmi-class-names" type="application/json">
