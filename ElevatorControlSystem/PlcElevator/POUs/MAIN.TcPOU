@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.16">
   <POU Name="MAIN" Id="{44d9e061-88c7-4304-9a8b-ad151f405f39}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
@@ -73,7 +73,10 @@ IF bResetCalls THEN
 				GVL_HMI.bFloorCallsOutside[iTest] := FALSE;
 				GVL_HMI.bCabinCallsInside[iTest] := FALSE;
 	END_FOR
+	bRunTestCases := FALSE;
+	nTestStep := 0;
 	fbCar.MoveToFloor(1);
+	bResetCalls := FALSE; // Reset command trigger
 END_IF
 ]]></ST>
     </Implementation>
@@ -84,6 +87,8 @@ END_IF
       <LineId Id="68" Count="0" />
       <LineId Id="71" Count="2" />
       <LineId Id="69" Count="0" />
+      <LineId Id="75" Count="0" />
+      <LineId Id="77" Count="0" />
       <LineId Id="74" Count="0" />
       <LineId Id="70" Count="0" />
       <LineId Id="2" Count="0" />
